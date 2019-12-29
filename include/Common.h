@@ -7,4 +7,16 @@
 #ifndef RROSACE_SEAPLANES_COMMON_H
 #define RROSACE_SEAPLANES_COMMON_H
 
+#include <string>
+#include <vector>
+
+#include <rrosace.h>
+
+using Name = std::string;
+
+using UpFederate = std::unique_ptr<class Federate>;
+
+using UpModel = std::unique_ptr<RROSACE::Model>;
+using VecUpModels = std::vector<UpModel>;
+
 #endif // RROSACE_SEAPLANES_COMMON_H
