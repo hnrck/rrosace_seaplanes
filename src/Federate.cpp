@@ -20,9 +20,14 @@ Federate::Federate(Name federation, Name federate, Name fom,
       __up_models_{std::move(up_models)} {}
 
 void Federate::localsCalculation() {
-  // TODO check scheduling
   for (auto &up_model : __up_models_) {
-    up_model->step();
+    const size_t logical_time =
+        static_cast<size_t>(getLocalTime().get_ms() / getTimeStep().get_ms());
+    const size_t model_logical_period =
+        static_cast<size_t>(up_model->get_dt() / getTimeStep().get_ms());
+    if (logical_time % model_logical_period == 0) {
+      up_model->step();
+    }
   }
 }
 
