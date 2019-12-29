@@ -59,51 +59,55 @@ public:
   double va_c{VA_C};
 
   struct Status final {
-    enum {
+    enum State : uint8_t {
       IGNORED = 0,
       PUBLISH = 1,
       SUBSCRIBE = 2,
       LOCAL = 3,
     };
-    union {
-      uint8_t state;
-      struct {
+    union state_flags {
+      State state{IGNORED};
+      struct Flags {
         uint8_t publish : 1;
         uint8_t subscribe : 1;
-      };
-    };
+      } flags;
+    } sf;
+
+    void set_publish_flag() { sf.flags.publish = 1; }
+
+    void set_subscribe_flag() { sf.flags.subscribe = 1; }
   };
 
-  Status mode_status{Status::IGNORED};
-  Status delta_e_status{Status::IGNORED};
-  Status delta_e_c_partial_1_status{Status::IGNORED};
-  Status delta_e_c_partial_2_status{Status::IGNORED};
-  Status delta_th_c_partial_1_status{Status::IGNORED};
-  Status delta_th_c_partial_2_status{Status::IGNORED};
-  Status relay_delta_e_c_1_status{Status::IGNORED};
-  Status relay_delta_e_c_2_status{Status::IGNORED};
-  Status relay_delta_th_c_1_status{Status::IGNORED};
-  Status relay_delta_th_c_2_status{Status::IGNORED};
-  Status delta_e_c_status{Status::IGNORED};
-  Status delta_th_c_status{Status::IGNORED};
-  Status t_status{Status::IGNORED};
-  Status h_status{Status::IGNORED};
-  Status vz_status{Status::IGNORED};
-  Status va_status{Status::IGNORED};
-  Status q_status{Status::IGNORED};
-  Status az_status{Status::IGNORED};
-  Status h_f_status{Status::IGNORED};
-  Status vz_f_status{Status::IGNORED};
-  Status va_f_status{Status::IGNORED};
-  Status q_f_status{Status::IGNORED};
-  Status az_f_status{Status::IGNORED};
-  Status master_in_law_1_status{Status::IGNORED};
-  Status master_in_law_2_status{Status::IGNORED};
-  Status other_master_in_law_1_status{Status::IGNORED};
-  Status other_master_in_law_2_status{Status::IGNORED};
-  Status h_c_status{Status::IGNORED};
-  Status vz_c_status{Status::IGNORED};
-  Status va_c_status{Status::IGNORED};
+  Status mode_status{};
+  Status delta_e_status{};
+  Status delta_e_c_partial_1_status{};
+  Status delta_e_c_partial_2_status{};
+  Status delta_th_c_partial_1_status{};
+  Status delta_th_c_partial_2_status{};
+  Status relay_delta_e_c_1_status{};
+  Status relay_delta_e_c_2_status{};
+  Status relay_delta_th_c_1_status{};
+  Status relay_delta_th_c_2_status{};
+  Status delta_e_c_status{};
+  Status delta_th_c_status{};
+  Status t_status{};
+  Status h_status{};
+  Status vz_status{};
+  Status va_status{};
+  Status q_status{};
+  Status az_status{};
+  Status h_f_status{};
+  Status vz_f_status{};
+  Status va_f_status{};
+  Status q_f_status{};
+  Status az_f_status{};
+  Status master_in_law_1_status{};
+  Status master_in_law_2_status{};
+  Status other_master_in_law_1_status{};
+  Status other_master_in_law_2_status{};
+  Status h_c_status{};
+  Status vz_c_status{};
+  Status va_c_status{};
 
   Values(const Values &) = delete;
   Values &operator=(const Values &) = delete;
