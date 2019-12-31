@@ -104,6 +104,8 @@ set(RROSACE_SEAPLANES_SRCS
         ${CMAKE_SOURCE_DIR}/src/Configuration.cpp
         ${CMAKE_SOURCE_DIR}/src/FederateBuilder.cpp
         ${CMAKE_SOURCE_DIR}/src/ModelFactory.cpp
+        ${CMAKE_SOURCE_DIR}/src/Updaters.cpp
+        ${CMAKE_SOURCE_DIR}/src/Retrievers.cpp
         ${CMAKE_SOURCE_DIR}/src/main.cpp)
 
 add_executable(rrosace_federate ${RROSACE_SEAPLANES_SRCS})

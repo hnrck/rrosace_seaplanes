@@ -7,7 +7,6 @@
 #ifndef RROSACE_SEAPLANES_VALUES_H
 #define RROSACE_SEAPLANES_VALUES_H
 
-#include <FederateBuilder.h>
 #include <rrosace.h>
 
 #define H_C (RROSACE::H_EQ)

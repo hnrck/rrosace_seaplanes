@@ -10,10 +10,19 @@
 #include <Common.h>
 #include <FederateBuilder.h>
 #include <ProtoLogicalProcessor.h>
+#include <Retrievers.h>
+#include <Updaters.h>
 
 class Federate final : Seaplanes::ProtoLogicalProcessor {
 private:
   VecUpModels __up_models_;
+  MapSpObjects __sp_objects_map_{};
+
+  MapUpObjectInstancesPublished __up_instances_published_map_{};
+  MapUpObjectInstancesSubscribed __up_instances_subscribed_map_{};
+
+  VecUpRetrievers __retrievers_{};
+  VecUpUpdaters __updaters_{};
 
 public:
   Federate(Name federation, Name federate, Name fom, VecUpModels up_models,
