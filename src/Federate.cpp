@@ -11,10 +11,10 @@
 
 Federate::Federate(Name federation, Name federate, Name fom,
                    VecUpModels up_models, Seaplanes::SeaplanesTime end_time,
-                   double timestep)
+                   double time_step)
     : Seaplanes::ProtoLogicalProcessor(
           std::move(federation), std::move(federate), std::move(fom),
-          end_time.get_s(), timestep, timestep, Name()),
+          end_time.get_s(), time_step, time_step, Name()),
       __up_models_{std::move(up_models)} {
   for (auto &status_creators_tuple :
        Values::get_instance().status_creators_tuples_array) {

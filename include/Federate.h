@@ -26,7 +26,7 @@ private:
 
 public:
   Federate(Name federation, Name federate, Name fom, VecUpModels up_models,
-           Seaplanes::SeaplanesTime end_time, double timestep);
+           Seaplanes::SeaplanesTime end_time, double time_step);
 
   void localsCalculation() final;
   void initDumpFiles() final;
