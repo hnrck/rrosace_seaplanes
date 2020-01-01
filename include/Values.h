@@ -7,6 +7,11 @@
 #ifndef RROSACE_SEAPLANES_VALUES_H
 #define RROSACE_SEAPLANES_VALUES_H
 
+#include <Retrievers.h>
+#include <Updaters.h>
+
+#include <array>
+
 #include <rrosace.h>
 
 #define H_C (RROSACE::H_EQ)
@@ -14,10 +19,6 @@
 #define VA_C (RROSACE::VA_EQ)
 
 struct Values final {
-private:
-  Values() = default;
-
-public:
   RROSACE::FlightMode::Mode mode{RROSACE::FlightMode::Mode::RROSACE_COMMANDED};
   double delta_e{RROSACE::DELTA_E_EQ};
   double delta_e_c_partial_1{RROSACE::DELTA_E_C_EQ};
@@ -63,7 +64,7 @@ public:
       PUBLISH = 1,
       SUBSCRIBE = 2,
       LOCAL = 3,
-    };
+    } state;
     union state_flags {
       State state{IGNORED};
       struct Flags {
@@ -108,6 +109,12 @@ public:
   Status vz_c_status{};
   Status va_c_status{};
 
+  using StatusCreatorsTuple =
+      std::tuple<Values::Status &, updaterCreator, retrieverCreator>;
+  using StatusCreatorsTuplesArray = std::array<StatusCreatorsTuple, 26>;
+
+  StatusCreatorsTuplesArray status_creators_tuples_array;
+
   Values(const Values &) = delete;
   Values &operator=(const Values &) = delete;
   Values(Values &&) = default;
@@ -117,6 +124,9 @@ public:
     static auto &&values = Values();
     return values;
   }
+
+private:
+  Values();
 };
 
 #endif // RROSACE_SEAPLANES_VALUES_H

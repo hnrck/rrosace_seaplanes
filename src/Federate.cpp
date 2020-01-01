@@ -7,6 +7,7 @@
 #include <Configuration.h>
 #include <Federate.h>
 #include <Updaters.h>
+#include <Values.h>
 
 Federate::Federate(Name federation, Name federate, Name fom,
                    VecUpModels up_models, Seaplanes::SeaplanesTime end_time,
@@ -15,11 +16,20 @@ Federate::Federate(Name federation, Name federate, Name fom,
           std::move(federation), std::move(federate), std::move(fom),
           end_time.get_s(), timestep, timestep, Name()),
       __up_models_{std::move(up_models)} {
-  // TODO algo for retrievers and updaters generation
-  __retrievers_.push_back(Retriever::create<AltitudeRetriever, 1>(
-      __sp_objects_map_, __up_instances_subscribed_map_));
-  __updaters_.push_back(Updater::create<AltitudeUpdater, 1>(
-      __sp_objects_map_, __up_instances_published_map_));
+  for (auto &status_creators_tuple :
+       Values::get_instance().status_creators_tuples_array) {
+    if (std::get<0>(status_creators_tuple).state ==
+        Values::Status::State::PUBLISH) {
+      __updaters_.push_back(std::get<1>(status_creators_tuple)(
+          __sp_objects_map_, __up_instances_published_map_));
+    }
+    if (std::get<0>(status_creators_tuple).state ==
+        Values::Status::State::SUBSCRIBE) {
+      __retrievers_.push_back(std::get<2>(status_creators_tuple)(
+          __sp_objects_map_, __up_instances_subscribed_map_));
+    }
+  }
+  // TODO move objects
 }
 
 void Federate::localsCalculation() {

@@ -9,12 +9,13 @@
 
 #include <Common.h>
 #include <IBinder.h>
-#include <Values.h>
 
 #include <utility>
 
 using UpRetriever = std::unique_ptr<class Retriever>;
 using VecUpRetrievers = std::vector<UpRetriever>;
+using retrieverCreator = UpRetriever (*)(MapSpObjects &,
+                                         MapUpObjectInstancesSubscribed &);
 
 class Retriever : public IBinder {
 protected:

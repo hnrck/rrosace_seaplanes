@@ -5,6 +5,7 @@
 //! \brief Values retrievers implementations
 
 #include <Retrievers.h>
+#include <Values.h>
 
 Retriever::Retriever(
     const Name &attribute_name, const Name &object_name,

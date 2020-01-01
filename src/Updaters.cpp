@@ -5,6 +5,7 @@
 //! \brief Values updaters implementations
 
 #include <Updaters.h>
+#include <Values.h>
 
 Updater::Updater(const Name &attribute_name, const Name &object_name,
                  const Name &instance_name, MapSpObjects &sp_objects_map,

@@ -9,12 +9,13 @@
 
 #include <Common.h>
 #include <IBinder.h>
-#include <Values.h>
 
 #include <utility>
 
 using UpUpdater = std::unique_ptr<class Updater>;
 using VecUpUpdaters = std::vector<UpUpdater>;
+using updaterCreator = UpUpdater (*)(MapSpObjects &,
+                                     MapUpObjectInstancesPublished &);
 
 class Updater : public IBinder {
 protected:
