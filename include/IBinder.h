@@ -63,6 +63,7 @@ protected:
       "RelayControlCommandPartialInstance"};
   const std::string RELAY_ELEVATOR_DEFLECTION_COMMAND{
       "relayElevatorDeflectionCommandPartial"};
+  const std::string RELAY_THROTTLE_COMMAND{"relayThrottleCommand"};
 
 public:
   virtual ~IBinder() = default;

@@ -16,7 +16,7 @@ Federate::Federate(Name federation, Name federate, Name fom,
           end_time.get_s(), timestep, timestep, Name()),
       __up_models_{std::move(up_models)} {
   // TODO algo for retrievers and updaters generation
-  __retrievers_.push_back(Retriever::create<AltitudeRetriever>(
+  __retrievers_.push_back(Retriever::create<AltitudeRetriever, 1>(
       __sp_objects_map_, __up_instances_subscribed_map_));
   __updaters_.push_back(Updater::create<AltitudeUpdater>(
       __sp_objects_map_, __up_instances_published_map_));
