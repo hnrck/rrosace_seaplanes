@@ -6,7 +6,6 @@
 
 #include <Configuration.h>
 #include <Federate.h>
-#include <Updaters.h>
 #include <Values.h>
 
 Federate::Federate(Name federation, Name federate, Name fom,
