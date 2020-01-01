@@ -67,14 +67,14 @@ public:
     union state_flags {
       State state{IGNORED};
       struct Flags {
-        uint8_t publish : 1;
-        uint8_t subscribe : 1;
+        uint8_t produced : 1;
+        uint8_t consumed : 1;
       } flags;
     } sf;
 
-    void set_publish_flag() { sf.flags.publish = 1; }
+    void set_produced_flag() { sf.flags.produced = 1; }
 
-    void set_subscribe_flag() { sf.flags.subscribe = 1; }
+    void set_consumed_flag() { sf.flags.consumed = 1; }
   };
 
   Status mode_status{};
