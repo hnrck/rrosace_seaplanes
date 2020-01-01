@@ -1,0 +1,70 @@
+(FED
+	(Federation RROSACE) ;; RROSACE tag
+	(FEDVersion v1.5)    ;; FED Version
+	(spaces              ;; No routing spaces for now ;; TBD
+	)
+	(objects
+
+		(class ObjectRoot
+			(attribute privilegeToDeleteObject reliable timestamp)
+			(class RTIprivate)
+			(class Aircraft ;; 200Hz
+				(attribute key reliable timestamp)
+				(attribute altitude reliable timestamp)
+				(attribute verticalAcceleration reliable timestamp)
+				(attribute verticalSpeed reliable timestamp)
+				(attribute trueAirspeed reliable timestamp)
+				(attribute pitchRate reliable timestamp)
+			)
+			(class Filters
+				(attribute key reliable timestamp)
+				(attribute filteredAltitude reliable timestamp) ;; 50Hz
+				(attribute filteredVerticalAcceleration reliable timestamp) ;; 100Hz
+				(attribute filteredVerticalSpeed reliable timestamp) ;; 100Hz
+				(attribute filteredTrueAirspeed reliable timestamp) ;; 100Hz
+				(attribute filteredPitchRate reliable timestamp) ;; 100Hz
+			)
+			(class Reference ;; ?? Hz, might not be periodic.
+				(attribute key reliable timestamp)
+				(attribute altitudeRef reliable timestamp)
+				(attribute trueAirspeedRef reliable timestamp)
+				(attribute verticalSpeedRef reliable timestamp)
+			)
+			(class Elevator ;; 200Hz
+				(attribute key reliable timestamp)
+				(attribute elevatorDeflection reliable timestamp)
+			)
+			(class Engine ;; 200Hz
+				(attribute key reliable timestamp)
+				(attribute engineThrust reliable timestamp)
+			)
+			(class FlightMode ;; ?? Hz, same as the reference
+				(attribute key reliable timestamp)
+				(attribute mode reliable timestamp)
+			)
+			(class ControlCommand ;; 50Hz or 200Hz
+				(attribute key reliable timestamp)
+				(attribute elevatorDeflectionCommand reliable timestamp)
+				(attribute throttleCommand reliable timestamp)
+			)
+			(class ControlCommandPartial ;; 50Hz
+				(attribute key reliable timestamp)
+				(attribute elevatorDeflectionCommandPartial reliable timestamp)
+				(attribute throttleCommandPartial reliable timestamp)
+			)
+			(class RelayControlCommandPartial ;; 50Hz
+				(attribute key reliable timestamp)
+				(attribute relayElevatorDeflectionCommandPartial reliable timestamp)
+				(attribute relayThrottleCommandPartial reliable timestamp)
+			)
+		) ;; end ObjectRoot
+	) ;; end Objects
+	(interactions
+		(class InteractionRoot reliable timestamp
+			(class RTIprivate reliable timestamp)
+			(class StopFreeze reliable receive
+				(parameter KillActivity)
+			)
+		) ;; end InteractionRoot
+	) ;; end Interactions
+) ;; end FED
