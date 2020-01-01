@@ -13,7 +13,7 @@
 #include <Retrievers.h>
 #include <Updaters.h>
 
-class Federate final : Seaplanes::ProtoLogicalProcessor {
+class Federate final : public Seaplanes::ProtoLogicalProcessor {
 private:
   VecUpModels __up_models_;
   MapSpObjects __sp_objects_map_{};

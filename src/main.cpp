@@ -25,9 +25,10 @@ int main(int argc, char *argv[]) {
     }
 
     // TODO build federate
-    auto federate = builder.build();
+    auto up_federate = builder.build();
 
     // TODO run federate
+    up_federate->run();
 
   } catch (const uninitializedConfiguration &e) {
     std::cerr << e.what() << std::endl;
