@@ -37,8 +37,7 @@ FederateBuilder &FederateBuilder::addModel(UpModel &&up_model) {
 }
 
 UpFederate FederateBuilder::build() {
-  // TODO implement
-  auto dt = 0.;
+  auto dt = std::numeric_limits<double>::max();
 
   for (auto &model : __models_) {
     if (dt > model->get_dt()) {

@@ -51,10 +51,12 @@ void Federate::localsCalculation() {
   }
 
   for (auto &up_model : __up_models_) {
-    const size_t logical_time =
+    const auto logical_time =
         static_cast<size_t>(getLocalTime().get_ms() / getTimeStep().get_ms());
-    const size_t model_logical_period =
-        static_cast<size_t>(up_model->get_dt() / getTimeStep().get_ms());
+
+    const auto model_logical_period =
+        static_cast<size_t>(up_model->get_dt() / getTimeStep().get_s());
+
     if (logical_time % model_logical_period == 0) {
       up_model->step();
     }
