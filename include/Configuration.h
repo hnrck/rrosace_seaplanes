@@ -42,7 +42,6 @@ public:
   bool get_verbose() const;
   std::ostream &get_log() const;
   std::ostream &get_output() const;
-  std::vector<Name> get_values() const;
   std::vector<Name> get_models() const;
 
   Seaplanes::SeaplanesTime get_end_time() const;
@@ -54,7 +53,6 @@ private:
   bool __verbose_;
   std::ostream &__log_;
   std::ostream &__output_;
-  std::vector<Name> __values_;
   std::vector<Name> __models_;
 
   Seaplanes::SeaplanesTime __end_time_;

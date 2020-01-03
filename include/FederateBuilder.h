@@ -20,7 +20,6 @@ private:
 
   VecUpModels __models_{};
 
-  // TODO values to print
 public:
   FederateBuilder();
   virtual ~FederateBuilder();

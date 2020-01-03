@@ -19,18 +19,6 @@
 
 using std::vector;
 
-static void parse_values(std::vector<Name> &values, const char str[],
-                         char dlm = ',') {
-  // Put the string to parse in a string stream and parse substrings delimited
-  // by dlm in tokens.
-
-  std::stringstream ss(str);
-  std::string token;
-  while (std::getline(ss, token, dlm)) {
-    values.emplace_back(token);
-  }
-}
-
 const char *uninitializedConfiguration::what() const noexcept {
   return "Configuration is not initialized. Make sure to set at least "
          "federation, fom, federate name and one model.";
@@ -38,7 +26,7 @@ const char *uninitializedConfiguration::what() const noexcept {
 
 Configuration::Configuration()
     : __federation_{}, __fom_{}, __federate_{}, __verbose_{false},
-      __log_{std::clog}, __output_{std::cout}, __values_{}, __models_{},
+      __log_{std::clog}, __output_{std::cout}, __models_{},
       __end_time_(Seaplanes::SeaplanesTime(DEFAULT_END_TIME)),
       __federation_set_(false), __fom_set_(false) {}
 
@@ -47,13 +35,12 @@ Configuration::Configuration(int argc, char *argv[]) : Configuration() {
 }
 
 void Configuration::parse_arguments(int argc, char *argv[]) noexcept(false) {
-  const auto *short_opts = "f:m:n:e:p:vh";
+  const auto *short_opts = "f:m:n:e:vh";
   const auto long_opts =
       std::vector<option>{{"federation", required_argument, nullptr, 'f'},
                           {"fom", required_argument, nullptr, 'm'},
                           {"name", required_argument, nullptr, 'n'},
                           {"end", required_argument, nullptr, 'e'},
-                          {"print_values", required_argument, nullptr, 'p'},
                           {"verbose", no_argument, nullptr, 'v'},
                           {"help", no_argument, nullptr, 'h'},
                           {nullptr, no_argument, nullptr, 0}};
@@ -86,10 +73,6 @@ void Configuration::parse_arguments(int argc, char *argv[]) noexcept(false) {
       __end_time_ = Seaplanes::SeaplanesTime(optarg);
       break;
 
-    case 'p':
-      parse_values(__values_, optarg);
-      break;
-
     case 'v':
       __verbose_ = true;
       break;
@@ -118,7 +101,6 @@ Name Configuration::get_federate() const { return __federate_; }
 bool Configuration::get_verbose() const { return __verbose_; }
 std::ostream &Configuration::get_log() const { return __log_; }
 std::ostream &Configuration::get_output() const { return __output_; }
-std::vector<Name> Configuration::get_values() const { return __values_; }
 std::vector<Name> Configuration::get_models() const { return __models_; }
 Seaplanes::SeaplanesTime Configuration::get_end_time() const {
   return __end_time_;
@@ -144,10 +126,6 @@ std::ostream &operator<<(std::ostream &stream,
     std::copy(configuration.__models_.begin(), configuration.__models_.end(),
               std::ostream_iterator<Name>(std::cout, " "));
     stream << std::endl;
-    stream << "\t\tprint values:" << std::endl << "\t\t\t";
-    std::copy(configuration.__values_.begin(), configuration.__values_.end(),
-              std::ostream_iterator<Name>(std::cout, " "));
-    stream << std::endl;
   }
   return (stream);
 }
@@ -169,9 +147,6 @@ void Configuration::print_help(const char exec_name[],
   stream << std::endl;
 
   stream << "Optional:" << std::endl;
-  stream << "\t--print,  -p <value>[,...]:    Set the values to print, "
-            "separated by ','"
-         << std::endl;
   stream << "\t--end_time,  -e <end_time>:    Set the end (default "
          << DEFAULT_END_TIME << "s)" << std::endl;
   stream << std::endl;

@@ -24,10 +24,8 @@ int main(int argc, char *argv[]) {
       builder.addModel(ModelFactory::Generate(model_name));
     }
 
-    // TODO build federate
     auto up_federate = builder.build();
 
-    // TODO run federate
     up_federate->run();
 
   } catch (const uninitializedConfiguration &e) {
