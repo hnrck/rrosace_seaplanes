@@ -25,8 +25,8 @@ const char *uninitializedConfiguration::what() const noexcept {
 }
 
 Configuration::Configuration()
-    : __federation_{}, __fom_{}, __federate_{}, __verbose_{false},
-      __log_{std::clog}, __output_{std::cout}, __models_{},
+    : __federation_{}, __fom_{}, __federate_{},
+      __verbose_{false}, __log_{std::clog}, __output_{std::cout}, __models_{},
       __end_time_(Seaplanes::SeaplanesTime(DEFAULT_END_TIME)),
       __federation_set_(false), __fom_set_(false) {}
 
