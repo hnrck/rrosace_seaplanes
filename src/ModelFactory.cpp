@@ -77,8 +77,8 @@ UpModel ModelFactory::Generate<RROSACE::VerticalAirspeedFilter, 1>() {
   auto &&values = Values::get_instance();
   values.vz_status.set_consumed_flag();
   values.vz_f_status.set_produced_flag();
-  return std::make_unique<RROSACE::VerticalAccelerationFilter>(values.vz,
-                                                               values.vz_f);
+  return std::make_unique<RROSACE::VerticalAirspeedFilter>(values.vz,
+                                                           values.vz_f);
 }
 
 template <> UpModel ModelFactory::Generate<RROSACE::TrueAirspeedFilter, 1>() {
@@ -246,7 +246,7 @@ UpModel ModelFactory::Generate(const Name &model_name) {
     } else if (model_type.first == typeid(RROSACE::AltitudeFilter)) {
       return ModelFactory::Generate<RROSACE::AltitudeFilter, 1>();
     } else if (model_type.first == typeid(RROSACE::VerticalAirspeedFilter)) {
-      return ModelFactory::Generate<RROSACE::VerticalAccelerationFilter, 1>();
+      return ModelFactory::Generate<RROSACE::VerticalAirspeedFilter, 1>();
     } else if (model_type.first == typeid(RROSACE::TrueAirspeedFilter)) {
       return ModelFactory::Generate<RROSACE::TrueAirspeedFilter, 1>();
     } else if (model_type.first == typeid(RROSACE::PitchRateFilter)) {
