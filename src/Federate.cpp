@@ -19,13 +19,12 @@ Federate::Federate(Name federation, Name federate, Name fom,
   for (auto &status_creators_tuple :
        Values::get_instance().status_creators_tuples_array) {
 
-    if (std::get<0>(status_creators_tuple).state ==
-        Values::Status::State::PUBLISH) {
+    if (std::get<0>(status_creators_tuple).sf.flags.produced == 0x1) {
       __updaters_.push_back(std::get<1>(status_creators_tuple)(
           __sp_objects_map_, __up_instances_published_map_));
     }
 
-    if (std::get<0>(status_creators_tuple).state ==
+    if (std::get<0>(status_creators_tuple).sf.state ==
         Values::Status::State::SUBSCRIBE) {
       __retrievers_.push_back(std::get<2>(status_creators_tuple)(
           __sp_objects_map_, __up_instances_subscribed_map_));

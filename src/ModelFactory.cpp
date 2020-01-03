@@ -36,7 +36,6 @@ static const std::map<Name, std::pair<std::type_index, unsigned int>>
 // TODO complete
 template <> UpModel ModelFactory::Generate<RROSACE::Engine, 1>() {
   auto &&values = Values::get_instance();
-
   values.delta_th_c_status.set_consumed_flag();
   values.t_status.set_produced_flag();
   return std::make_unique<RROSACE::Engine>(RROSACE::TAU, values.delta_th_c,
@@ -155,9 +154,9 @@ UpModel ModelFactory::Generate<RROSACE::FlightControlComputerMonitor, 1>() {
   values.delta_e_c_partial_1_status.set_consumed_flag();
   values.delta_th_c_partial_1_status.set_consumed_flag();
   values.other_master_in_law_1_status.set_consumed_flag();
-  values.relay_delta_e_c_1_status.set_consumed_flag();
-  values.relay_delta_th_c_1_status.set_consumed_flag();
-  values.master_in_law_1_status.set_consumed_flag();
+  values.relay_delta_e_c_1_status.set_produced_flag();
+  values.relay_delta_th_c_1_status.set_produced_flag();
+  values.master_in_law_1_status.set_produced_flag();
   return std::make_unique<RROSACE::FlightControlComputer>(
       values.mode, values.h_f, values.vz_f, values.va_f, values.q_f,
       values.az_f, values.h_c, values.vz_c, values.va_c,
@@ -201,9 +200,9 @@ UpModel ModelFactory::Generate<RROSACE::FlightControlComputerMonitor, 2>() {
   values.delta_e_c_partial_2_status.set_consumed_flag();
   values.delta_th_c_partial_2_status.set_consumed_flag();
   values.other_master_in_law_2_status.set_consumed_flag();
-  values.relay_delta_e_c_2_status.set_consumed_flag();
-  values.relay_delta_th_c_2_status.set_consumed_flag();
-  values.master_in_law_2_status.set_consumed_flag();
+  values.relay_delta_e_c_2_status.set_produced_flag();
+  values.relay_delta_th_c_2_status.set_produced_flag();
+  values.master_in_law_2_status.set_produced_flag();
   return std::make_unique<RROSACE::FlightControlComputer>(
       values.mode, values.h_f, values.vz_f, values.va_f, values.q_f,
       values.az_f, values.h_c, values.vz_c, values.va_c,
@@ -214,16 +213,16 @@ UpModel ModelFactory::Generate<RROSACE::FlightControlComputerMonitor, 2>() {
 
 template <> UpModel ModelFactory::Generate<RROSACE::Cables, 1>() {
   auto &&values = Values::get_instance();
-  values.delta_e_c_partial_1_status.set_produced_flag();
-  values.delta_th_c_partial_1_status.set_produced_flag();
-  values.relay_delta_e_c_1_status.set_produced_flag();
-  values.relay_delta_th_c_1_status.set_produced_flag();
-  values.delta_e_c_partial_2_status.set_produced_flag();
-  values.delta_th_c_partial_2_status.set_produced_flag();
-  values.relay_delta_e_c_2_status.set_produced_flag();
-  values.relay_delta_th_c_2_status.set_produced_flag();
-  values.delta_e_c_status.set_consumed_flag();
-  values.delta_th_c_status.set_consumed_flag();
+  values.delta_e_c_partial_1_status.set_consumed_flag();
+  values.delta_th_c_partial_1_status.set_consumed_flag();
+  values.relay_delta_e_c_1_status.set_consumed_flag();
+  values.relay_delta_th_c_1_status.set_consumed_flag();
+  values.delta_e_c_partial_2_status.set_consumed_flag();
+  values.delta_th_c_partial_2_status.set_consumed_flag();
+  values.relay_delta_e_c_2_status.set_consumed_flag();
+  values.relay_delta_th_c_2_status.set_consumed_flag();
+  values.delta_e_c_status.set_produced_flag();
+  values.delta_th_c_status.set_produced_flag();
   return std::make_unique<RROSACE::Cables>(
       values.delta_e_c_partial_1, values.delta_th_c_partial_1,
       values.relay_delta_e_c_1, values.relay_delta_th_c_1,
