@@ -11,59 +11,55 @@
 
 class IBinder {
 protected:
-  const std::string AIRCRAFT{"Aircraft"};
-  const std::string AIRCRAFT_INSTANCE{"AircraftInstance"};
-  const std::string TRUE_AIRSPEED{"trueAirspeed"};
-  const std::string VERTICAL_ACCELERATION{"verticalAcceleration"};
-  const std::string PITCH_RATE{"pitchRate"};
-  const std::string VERTICAL_SPEED{"verticalSpeed"};
-  const std::string ALTITUDE{"altitude"};
+  static const std::string AIRCRAFT;
+  static const std::string AIRCRAFT_INSTANCE;
+  static const std::string TRUE_AIRSPEED;
+  static const std::string VERTICAL_ACCELERATION;
+  static const std::string PITCH_RATE;
+  static const std::string VERTICAL_SPEED;
+  static const std::string ALTITUDE;
 
-  const std::string CONTROL_COMMAND{"ControlCommand"};
-  const std::string CONTROL_COMMAND_INSTANCE{"ControlCommandInstance"};
-  const std::string ELEVATOR_DEFLECTION_COMMAND{"elevatorDeflectionCommand"};
-  const std::string THROTTLE_COMMAND{"throttleCommand"};
+  static const std::string CONTROL_COMMAND;
+  static const std::string CONTROL_COMMAND_INSTANCE;
+  static const std::string ELEVATOR_DEFLECTION_COMMAND;
+  static const std::string THROTTLE_COMMAND;
 
-  const std::string CONTROL_COMMAND_PARTIAL{"ControlCommandPartial"};
-  const std::string CONTROL_COMMAND_PARTIAL_INSTANCE{
-      "ControlCommandPartialInstance"};
-  const std::string ELEVATOR_DEFLECTION_COMMAND_PARTIAL{
-      "elevatorDeflectionCommandPartial"};
-  const std::string THROTTLE_COMMAND_PARTIAL{"throttleCommandPartial"};
+  static const std::string CONTROL_COMMAND_PARTIAL;
+  static const std::string CONTROL_COMMAND_PARTIAL_INSTANCE;
+  static const std::string ELEVATOR_DEFLECTION_COMMAND_PARTIAL;
+  static const std::string THROTTLE_COMMAND_PARTIAL;
 
-  const std::string ENGINE{"Engine"};
-  const std::string ENGINE_INSTANCE{"EngineInstance"};
-  const std::string ENGINE_THRUST{"engineThrust"};
+  static const std::string ENGINE;
+  static const std::string ENGINE_INSTANCE;
+  static const std::string ENGINE_THRUST;
 
-  const std::string ELEVATOR{"Elevator"};
-  const std::string ELEVATOR_INSTANCE{"ElevatorInstance"};
-  const std::string ELEVATOR_DEFLECTION{"elevatorDeflection"};
+  static const std::string ELEVATOR;
+  static const std::string ELEVATOR_INSTANCE;
+  static const std::string ELEVATOR_DEFLECTION;
 
-  const std::string FILTERS{"Filters"};
-  const std::string FILTERS_INSTANCE{"FiltersInstance"};
-  const std::string FILTERED_TRUE_AIRSPEED{"filteredTrueAirspeed"};
-  const std::string FILTERED_VERTICAL_ACCELERATION{
-      "filteredVerticalAcceleration"};
-  const std::string FILTERED_PITCH_RATE{"filteredPitchRate"};
-  const std::string FILTERED_VERTICAL_SPEED{"filteredVerticalSpeed"};
-  const std::string FILTERED_ALTITUDE{"filteredAltitude"};
+  static const std::string FILTERS;
+  static const std::string FILTERS_INSTANCE;
+  static const std::string FILTERED_TRUE_AIRSPEED;
+  static const std::string FILTERED_VERTICAL_ACCELERATION;
 
-  const std::string FLIGHT_MODE{"FlightMode"};
-  const std::string FLIGHT_MODE_INSTANCE{"FlightModeInstance"};
-  const std::string MODE{"mode"};
+  static const std::string FILTERED_PITCH_RATE;
+  static const std::string FILTERED_VERTICAL_SPEED;
+  static const std::string FILTERED_ALTITUDE;
 
-  const std::string REFERENCE{"Reference"};
-  const std::string REFERENCE_INSTANCE{"ReferenceInstance"};
-  const std::string TRUE_AIRSPEED_REF{"trueAirspeedRef"};
-  const std::string VERTICAL_SPEED_REF{"verticalSpeedRef"};
-  const std::string ALTITUDE_REF{"altitudeRef"};
+  static const std::string FLIGHT_MODE;
+  static const std::string FLIGHT_MODE_INSTANCE;
+  static const std::string MODE;
 
-  const std::string RELAY_CONTROL_COMMAND{"RelayControlCommandPartial"};
-  const std::string RELAY_CONTROL_COMMAND_INSTANCE{
-      "RelayControlCommandPartialInstance"};
-  const std::string RELAY_ELEVATOR_DEFLECTION_COMMAND{
-      "relayElevatorDeflectionCommandPartial"};
-  const std::string RELAY_THROTTLE_COMMAND{"relayThrottleCommand"};
+  static const std::string REFERENCE;
+  static const std::string REFERENCE_INSTANCE;
+  static const std::string TRUE_AIRSPEED_REF;
+  static const std::string VERTICAL_SPEED_REF;
+  static const std::string ALTITUDE_REF;
+
+  static const std::string RELAY_CONTROL_COMMAND;
+  static const std::string RELAY_CONTROL_COMMAND_INSTANCE;
+  static const std::string RELAY_ELEVATOR_DEFLECTION_COMMAND;
+  static const std::string RELAY_THROTTLE_COMMAND;
 
 public:
   virtual ~IBinder() = default;
