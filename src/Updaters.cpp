@@ -37,11 +37,11 @@ void Updater::sync() { update(); }
 ThrustUpdater::ThrustUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::ENGINE_THRUST, IBinder::ENGINE, IBinder::ENGINE_INSTANCE,
-              sp_objects_map, up_instances_published_map) {}
+    : Updater(ENGINE_THRUST, ENGINE, ENGINE_INSTANCE, sp_objects_map,
+              up_instances_published_map) {}
 
 void ThrustUpdater::update() {
-  Values::get_instance().t = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().t);
 }
 
 template <>
@@ -56,12 +56,11 @@ UpUpdater Updater::create<ThrustUpdater, 1>(
 ElevatorDeflectionUpdater::ElevatorDeflectionUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::ELEVATOR_DEFLECTION, IBinder::ELEVATOR,
-              IBinder::ELEVATOR_INSTANCE, sp_objects_map,
+    : Updater(ELEVATOR_DEFLECTION, ELEVATOR, ELEVATOR_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
 void ElevatorDeflectionUpdater::update() {
-  Values::get_instance().delta_e = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().delta_e);
 }
 
 template <>
@@ -76,11 +75,11 @@ UpUpdater Updater::create<ElevatorDeflectionUpdater, 1>(
 AltitudeUpdater::AltitudeUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::ALTITUDE, IBinder::AIRCRAFT, IBinder::AIRCRAFT_INSTANCE,
-              sp_objects_map, up_instances_published_map) {}
+    : Updater(ALTITUDE, AIRCRAFT, AIRCRAFT_INSTANCE, sp_objects_map,
+              up_instances_published_map) {}
 
 void AltitudeUpdater::update() {
-  Values::get_instance().h = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().h);
 }
 
 template <>
@@ -95,12 +94,11 @@ UpUpdater Updater::create<AltitudeUpdater, 1>(
 VerticalSpeedUpdater::VerticalSpeedUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::VERTICAL_SPEED, IBinder::AIRCRAFT,
-              IBinder::AIRCRAFT_INSTANCE, sp_objects_map,
+    : Updater(VERTICAL_SPEED, AIRCRAFT, AIRCRAFT_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
 void VerticalSpeedUpdater::update() {
-  Values::get_instance().vz = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().vz);
 }
 
 template <>
@@ -115,12 +113,11 @@ UpUpdater Updater::create<VerticalSpeedUpdater, 1>(
 TrueAirspeedUpdater::TrueAirspeedUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::TRUE_AIRSPEED, IBinder::AIRCRAFT,
-              IBinder::AIRCRAFT_INSTANCE, sp_objects_map,
+    : Updater(TRUE_AIRSPEED, AIRCRAFT, AIRCRAFT_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
 void TrueAirspeedUpdater::update() {
-  Values::get_instance().va = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().va);
 }
 
 template <>
@@ -135,12 +132,11 @@ UpUpdater Updater::create<TrueAirspeedUpdater, 1>(
 PitchRateUpdater::PitchRateUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::PITCH_RATE, IBinder::AIRCRAFT,
-              IBinder::AIRCRAFT_INSTANCE, sp_objects_map,
+    : Updater(PITCH_RATE, AIRCRAFT, AIRCRAFT_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
 void PitchRateUpdater::update() {
-  Values::get_instance().q = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().q);
 }
 
 template <>
@@ -155,12 +151,11 @@ UpUpdater Updater::create<PitchRateUpdater, 1>(
 VerticalAccelerationUpdater::VerticalAccelerationUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::VERTICAL_ACCELERATION, IBinder::AIRCRAFT,
-              IBinder::AIRCRAFT_INSTANCE, sp_objects_map,
-              up_instances_published_map) {}
+    : Updater(VERTICAL_ACCELERATION, AIRCRAFT, AIRCRAFT_INSTANCE,
+              sp_objects_map, up_instances_published_map) {}
 
 void VerticalAccelerationUpdater::update() {
-  Values::get_instance().az = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().az);
 }
 
 template <>
@@ -175,12 +170,11 @@ UpUpdater Updater::create<VerticalAccelerationUpdater, 1>(
 FilteredAltitudeUpdater::FilteredAltitudeUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::FILTERED_ALTITUDE, IBinder::FILTERS,
-              IBinder::FILTERS_INSTANCE, sp_objects_map,
+    : Updater(FILTERED_ALTITUDE, FILTERS, FILTERS_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
 void FilteredAltitudeUpdater::update() {
-  Values::get_instance().h_f = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().h_f);
 }
 
 template <>
@@ -195,12 +189,11 @@ UpUpdater Updater::create<FilteredAltitudeUpdater, 1>(
 FilteredVerticalSpeedUpdater::FilteredVerticalSpeedUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::FILTERED_VERTICAL_SPEED, IBinder::FILTERS,
-              IBinder::FILTERS_INSTANCE, sp_objects_map,
-              up_instances_published_map) {}
+    : Updater(FILTERED_VERTICAL_SPEED, FILTERS, FILTERS_INSTANCE,
+              sp_objects_map, up_instances_published_map) {}
 
 void FilteredVerticalSpeedUpdater::update() {
-  Values::get_instance().vz_f = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().vz_f);
 }
 
 template <>
@@ -215,12 +208,11 @@ UpUpdater Updater::create<FilteredVerticalSpeedUpdater, 1>(
 FilteredTrueAirspeedUpdater::FilteredTrueAirspeedUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::FILTERED_TRUE_AIRSPEED, IBinder::FILTERS,
-              IBinder::FILTERS_INSTANCE, sp_objects_map,
+    : Updater(FILTERED_TRUE_AIRSPEED, FILTERS, FILTERS_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
 void FilteredTrueAirspeedUpdater::update() {
-  Values::get_instance().va_f = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().va_f);
 }
 
 template <>
@@ -235,12 +227,11 @@ UpUpdater Updater::create<FilteredTrueAirspeedUpdater, 1>(
 FilteredPitchRateUpdater::FilteredPitchRateUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::FILTERED_PITCH_RATE, IBinder::FILTERS,
-              IBinder::FILTERS_INSTANCE, sp_objects_map,
+    : Updater(FILTERED_PITCH_RATE, FILTERS, FILTERS_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
 void FilteredPitchRateUpdater::update() {
-  Values::get_instance().q_f = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().q_f);
 }
 
 template <>
@@ -255,12 +246,11 @@ UpUpdater Updater::create<FilteredPitchRateUpdater, 1>(
 FilteredVerticalAccelerationUpdater::FilteredVerticalAccelerationUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::FILTERED_VERTICAL_ACCELERATION, IBinder::FILTERS,
-              IBinder::FILTERS_INSTANCE, sp_objects_map,
-              up_instances_published_map) {}
+    : Updater(FILTERED_VERTICAL_ACCELERATION, FILTERS, FILTERS_INSTANCE,
+              sp_objects_map, up_instances_published_map) {}
 
 void FilteredVerticalAccelerationUpdater::update() {
-  Values::get_instance().az_f = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().az_f);
 }
 
 template <>
@@ -275,13 +265,11 @@ UpUpdater Updater::create<FilteredVerticalAccelerationUpdater, 1>(
 ModeUpdater::ModeUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::MODE, IBinder::FLIGHT_MODE,
-              IBinder::FLIGHT_MODE_INSTANCE, sp_objects_map,
+    : Updater(MODE, FLIGHT_MODE, FLIGHT_MODE_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
 void ModeUpdater::update() {
-  Values::get_instance().mode =
-      RROSACE::FlightMode::Mode(__sp_attribute_->getValue<int>());
+  __sp_attribute_->setValue<int>(static_cast<int>(Values::get_instance().mode));
 }
 
 template <>
@@ -296,12 +284,11 @@ UpUpdater Updater::create<ModeUpdater, 1>(
 AltitudeRefUpdater::AltitudeRefUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::ALTITUDE_REF, IBinder::REFERENCE,
-              IBinder::REFERENCE_INSTANCE, sp_objects_map,
+    : Updater(ALTITUDE_REF, REFERENCE, REFERENCE_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
 void AltitudeRefUpdater::update() {
-  Values::get_instance().h_c = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().h_c);
 }
 
 template <>
@@ -316,12 +303,11 @@ UpUpdater Updater::create<AltitudeRefUpdater, 1>(
 VerticalSpeedRefUpdater::VerticalSpeedRefUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::VERTICAL_SPEED_REF, IBinder::REFERENCE,
-              IBinder::REFERENCE_INSTANCE, sp_objects_map,
+    : Updater(VERTICAL_SPEED_REF, REFERENCE, REFERENCE_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
 void VerticalSpeedRefUpdater::update() {
-  Values::get_instance().vz_c = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().vz_c);
 }
 
 template <>
@@ -336,12 +322,11 @@ UpUpdater Updater::create<VerticalSpeedRefUpdater, 1>(
 TrueAirspeedRefUpdater::TrueAirspeedRefUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::TRUE_AIRSPEED_REF, IBinder::REFERENCE,
-              IBinder::REFERENCE_INSTANCE, sp_objects_map,
+    : Updater(TRUE_AIRSPEED_REF, REFERENCE, REFERENCE_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
 void TrueAirspeedRefUpdater::update() {
-  Values::get_instance().va_c = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().va_c);
 }
 
 template <>
@@ -356,12 +341,11 @@ UpUpdater Updater::create<TrueAirspeedRefUpdater, 1>(
 ThrottleCommandUpdater::ThrottleCommandUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::THROTTLE_COMMAND, IBinder::CONTROL_COMMAND,
-              IBinder::CONTROL_COMMAND_INSTANCE, sp_objects_map,
-              up_instances_published_map) {}
+    : Updater(THROTTLE_COMMAND, CONTROL_COMMAND, CONTROL_COMMAND_INSTANCE,
+              sp_objects_map, up_instances_published_map) {}
 
 void ThrottleCommandUpdater::update() {
-  Values::get_instance().delta_th_c = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().delta_th_c);
 }
 
 template <>
@@ -376,12 +360,12 @@ UpUpdater Updater::create<ThrottleCommandUpdater, 1>(
 ElevatorDeflectionCommandUpdater::ElevatorDeflectionCommandUpdater(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::ELEVATOR_DEFLECTION_COMMAND, IBinder::CONTROL_COMMAND,
-              IBinder::CONTROL_COMMAND_INSTANCE, sp_objects_map,
+    : Updater(ELEVATOR_DEFLECTION_COMMAND, CONTROL_COMMAND,
+              CONTROL_COMMAND_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
 void ElevatorDeflectionCommandUpdater::update() {
-  Values::get_instance().delta_e_c = __sp_attribute_->getValue<double>();
+  __sp_attribute_->setValue<double>(Values::get_instance().delta_e_c);
 }
 
 template <>
@@ -396,21 +380,20 @@ UpUpdater Updater::create<ElevatorDeflectionCommandUpdater, 1>(
 ThrottleCommandPartialUpdater::ThrottleCommandPartialUpdater(
     unsigned int index, MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::THROTTLE_COMMAND_PARTIAL + std::to_string(index),
-              IBinder::CONTROL_COMMAND_PARTIAL,
-              IBinder::CONTROL_COMMAND_PARTIAL_INSTANCE, sp_objects_map,
-              up_instances_published_map),
+    : Updater(THROTTLE_COMMAND_PARTIAL, CONTROL_COMMAND_PARTIAL,
+              CONTROL_COMMAND_PARTIAL_INSTANCE + std::to_string(index),
+              sp_objects_map, up_instances_published_map),
       __index_(index) {}
 
 void ThrottleCommandPartialUpdater::update() {
   switch (__index_) {
   case 1:
-    Values::get_instance().delta_th_c_partial_1 =
-        __sp_attribute_->getValue<double>();
+    __sp_attribute_->setValue<double>(
+        Values::get_instance().delta_th_c_partial_1);
     break;
   case 2:
-    Values::get_instance().delta_th_c_partial_2 =
-        __sp_attribute_->getValue<double>();
+    __sp_attribute_->setValue<double>(
+        Values::get_instance().delta_th_c_partial_2);
     break;
   default:
     break;
@@ -438,25 +421,22 @@ UpUpdater Updater::create<ThrottleCommandPartialUpdater, 2>(
 RelayThrottleCommandPartialUpdater::RelayThrottleCommandPartialUpdater(
     unsigned int index, MapSpObjects &sp_objects_map,
     MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::RELAY_THROTTLE_COMMAND + std::to_string(index),
-              IBinder::RELAY_CONTROL_COMMAND,
-              IBinder::RELAY_CONTROL_COMMAND_INSTANCE, sp_objects_map,
-              up_instances_published_map),
+    : Updater(RELAY_THROTTLE_COMMAND, RELAY_CONTROL_COMMAND,
+              RELAY_CONTROL_COMMAND_INSTANCE + std::to_string(index),
+              sp_objects_map, up_instances_published_map),
       __index_(index) {}
 
 void RelayThrottleCommandPartialUpdater::update() {
   switch (__index_) {
   case 1:
-    Values::get_instance().relay_delta_th_c_1 =
-        __sp_attribute_->getValue<bool>()
-            ? RROSACE::Cables::RelayState::RROSACE_RELAY_OPENED
-            : RROSACE::Cables::RelayState ::RROSACE_RELAY_CLOSED;
+    __sp_attribute_->setValue<bool>(
+        Values::get_instance().relay_delta_th_c_1 ==
+        RROSACE::Cables::RelayState::RROSACE_RELAY_OPENED);
     break;
   case 2:
-    Values::get_instance().relay_delta_th_c_2 =
-        __sp_attribute_->getValue<bool>()
-            ? RROSACE::Cables::RelayState::RROSACE_RELAY_OPENED
-            : RROSACE::Cables::RelayState ::RROSACE_RELAY_CLOSED;
+    __sp_attribute_->setValue<bool>(
+        Values::get_instance().relay_delta_th_c_2 ==
+        RROSACE::Cables::RelayState::RROSACE_RELAY_OPENED);
     break;
   default:
     break;
@@ -485,22 +465,20 @@ ElevatorDeflectionCommandPartialUpdater::
     ElevatorDeflectionCommandPartialUpdater(
         unsigned int index, MapSpObjects &sp_objects_map,
         MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::ELEVATOR_DEFLECTION_COMMAND_PARTIAL +
-                  std::to_string(index),
-              IBinder::CONTROL_COMMAND_PARTIAL,
-              IBinder::CONTROL_COMMAND_PARTIAL_INSTANCE, sp_objects_map,
-              up_instances_published_map),
+    : Updater(ELEVATOR_DEFLECTION_COMMAND_PARTIAL, CONTROL_COMMAND_PARTIAL,
+              CONTROL_COMMAND_PARTIAL_INSTANCE + std::to_string(index),
+              sp_objects_map, up_instances_published_map),
       __index_(index) {}
 
 void ElevatorDeflectionCommandPartialUpdater::update() {
   switch (__index_) {
   case 1:
-    Values::get_instance().delta_e_c_partial_1 =
-        __sp_attribute_->getValue<double>();
+    __sp_attribute_->setValue<double>(
+        Values::get_instance().delta_e_c_partial_1);
     break;
   case 2:
-    Values::get_instance().delta_e_c_partial_2 =
-        __sp_attribute_->getValue<double>();
+    __sp_attribute_->setValue<double>(
+        Values::get_instance().delta_e_c_partial_2);
     break;
   default:
     break;
@@ -529,26 +507,22 @@ RelayElevatorDeflectionCommandPartialUpdater::
     RelayElevatorDeflectionCommandPartialUpdater(
         unsigned int index, MapSpObjects &sp_objects_map,
         MapUpObjectInstancesPublished &up_instances_published_map)
-    : Updater(IBinder::RELAY_ELEVATOR_DEFLECTION_COMMAND +
-                  std::to_string(index),
-              IBinder::RELAY_CONTROL_COMMAND,
-              IBinder::RELAY_CONTROL_COMMAND_INSTANCE, sp_objects_map,
-              up_instances_published_map),
+    : Updater(RELAY_ELEVATOR_DEFLECTION_COMMAND, RELAY_CONTROL_COMMAND,
+              RELAY_CONTROL_COMMAND_INSTANCE + std::to_string(index),
+              sp_objects_map, up_instances_published_map),
       __index_(index) {}
 
 void RelayElevatorDeflectionCommandPartialUpdater::update() {
   switch (__index_) {
   case 1:
-    Values::get_instance().relay_delta_th_c_1 =
-        __sp_attribute_->getValue<bool>()
-            ? RROSACE::Cables::RelayState::RROSACE_RELAY_OPENED
-            : RROSACE::Cables::RelayState ::RROSACE_RELAY_CLOSED;
+    __sp_attribute_->setValue<bool>(
+        Values::get_instance().relay_delta_e_c_1 ==
+        RROSACE::Cables::RelayState::RROSACE_RELAY_OPENED);
     break;
   case 2:
-    Values::get_instance().relay_delta_th_c_2 =
-        __sp_attribute_->getValue<bool>()
-            ? RROSACE::Cables::RelayState::RROSACE_RELAY_OPENED
-            : RROSACE::Cables::RelayState ::RROSACE_RELAY_CLOSED;
+    __sp_attribute_->setValue<bool>(
+        Values::get_instance().relay_delta_e_c_2 ==
+        RROSACE::Cables::RelayState::RROSACE_RELAY_OPENED);
     break;
   default:
     break;

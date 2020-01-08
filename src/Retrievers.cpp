@@ -38,8 +38,7 @@ void Retriever::sync() { retrieve(); }
 ThrustRetriever::ThrustRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::ENGINE_THRUST, IBinder::ENGINE,
-                IBinder::ENGINE_INSTANCE, sp_objects_map,
+    : Retriever(ENGINE_THRUST, ENGINE, ENGINE_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
 void ThrustRetriever::retrieve() {
@@ -58,9 +57,8 @@ UpRetriever Retriever::create<ThrustRetriever, 1>(
 ElevatorDeflectionRetriever::ElevatorDeflectionRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::ELEVATOR_DEFLECTION, IBinder::ELEVATOR,
-                IBinder::ELEVATOR_INSTANCE, sp_objects_map,
-                up_instances_subscribed_map) {}
+    : Retriever(ELEVATOR_DEFLECTION, ELEVATOR, ELEVATOR_INSTANCE,
+                sp_objects_map, up_instances_subscribed_map) {}
 
 void ElevatorDeflectionRetriever::retrieve() {
   Values::get_instance().delta_e = __sp_attribute_->getValue<double>();
@@ -78,8 +76,7 @@ UpRetriever Retriever::create<ElevatorDeflectionRetriever, 1>(
 AltitudeRetriever::AltitudeRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::ALTITUDE, IBinder::AIRCRAFT,
-                IBinder::AIRCRAFT_INSTANCE, sp_objects_map,
+    : Retriever(ALTITUDE, AIRCRAFT, AIRCRAFT_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
 void AltitudeRetriever::retrieve() {
@@ -98,8 +95,7 @@ UpRetriever Retriever::create<AltitudeRetriever, 1>(
 VerticalSpeedRetriever::VerticalSpeedRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::VERTICAL_SPEED, IBinder::AIRCRAFT,
-                IBinder::AIRCRAFT_INSTANCE, sp_objects_map,
+    : Retriever(VERTICAL_SPEED, AIRCRAFT, AIRCRAFT_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
 void VerticalSpeedRetriever::retrieve() {
@@ -118,8 +114,7 @@ UpRetriever Retriever::create<VerticalSpeedRetriever, 1>(
 TrueAirspeedRetriever::TrueAirspeedRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::TRUE_AIRSPEED, IBinder::AIRCRAFT,
-                IBinder::AIRCRAFT_INSTANCE, sp_objects_map,
+    : Retriever(TRUE_AIRSPEED, AIRCRAFT, AIRCRAFT_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
 void TrueAirspeedRetriever::retrieve() {
@@ -138,8 +133,7 @@ UpRetriever Retriever::create<TrueAirspeedRetriever, 1>(
 PitchRateRetriever::PitchRateRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::PITCH_RATE, IBinder::AIRCRAFT,
-                IBinder::AIRCRAFT_INSTANCE, sp_objects_map,
+    : Retriever(PITCH_RATE, AIRCRAFT, AIRCRAFT_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
 void PitchRateRetriever::retrieve() {
@@ -158,9 +152,8 @@ UpRetriever Retriever::create<PitchRateRetriever, 1>(
 VerticalAccelerationRetriever::VerticalAccelerationRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::VERTICAL_ACCELERATION, IBinder::AIRCRAFT,
-                IBinder::AIRCRAFT_INSTANCE, sp_objects_map,
-                up_instances_subscribed_map) {}
+    : Retriever(VERTICAL_ACCELERATION, AIRCRAFT, AIRCRAFT_INSTANCE,
+                sp_objects_map, up_instances_subscribed_map) {}
 
 void VerticalAccelerationRetriever::retrieve() {
   Values::get_instance().az = __sp_attribute_->getValue<double>();
@@ -178,8 +171,7 @@ UpRetriever Retriever::create<VerticalAccelerationRetriever, 1>(
 FilteredAltitudeRetriever::FilteredAltitudeRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::FILTERED_ALTITUDE, IBinder::FILTERS,
-                IBinder::FILTERS_INSTANCE, sp_objects_map,
+    : Retriever(FILTERED_ALTITUDE, FILTERS, FILTERS_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
 void FilteredAltitudeRetriever::retrieve() {
@@ -198,9 +190,8 @@ UpRetriever Retriever::create<FilteredAltitudeRetriever, 1>(
 FilteredVerticalSpeedRetriever::FilteredVerticalSpeedRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::FILTERED_VERTICAL_SPEED, IBinder::FILTERS,
-                IBinder::FILTERS_INSTANCE, sp_objects_map,
-                up_instances_subscribed_map) {}
+    : Retriever(FILTERED_VERTICAL_SPEED, FILTERS, FILTERS_INSTANCE,
+                sp_objects_map, up_instances_subscribed_map) {}
 
 void FilteredVerticalSpeedRetriever::retrieve() {
   Values::get_instance().vz_f = __sp_attribute_->getValue<double>();
@@ -218,9 +209,8 @@ UpRetriever Retriever::create<FilteredVerticalSpeedRetriever, 1>(
 FilteredTrueAirspeedRetriever::FilteredTrueAirspeedRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::FILTERED_TRUE_AIRSPEED, IBinder::FILTERS,
-                IBinder::FILTERS_INSTANCE, sp_objects_map,
-                up_instances_subscribed_map) {}
+    : Retriever(FILTERED_TRUE_AIRSPEED, FILTERS, FILTERS_INSTANCE,
+                sp_objects_map, up_instances_subscribed_map) {}
 
 void FilteredTrueAirspeedRetriever::retrieve() {
   Values::get_instance().va_f = __sp_attribute_->getValue<double>();
@@ -238,8 +228,7 @@ UpRetriever Retriever::create<FilteredTrueAirspeedRetriever, 1>(
 FilteredPitchRateRetriever::FilteredPitchRateRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::FILTERED_PITCH_RATE, IBinder::FILTERS,
-                IBinder::FILTERS_INSTANCE, sp_objects_map,
+    : Retriever(FILTERED_PITCH_RATE, FILTERS, FILTERS_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
 void FilteredPitchRateRetriever::retrieve() {
@@ -258,9 +247,8 @@ UpRetriever Retriever::create<FilteredPitchRateRetriever, 1>(
 FilteredVerticalAccelerationRetriever::FilteredVerticalAccelerationRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::FILTERED_VERTICAL_ACCELERATION, IBinder::FILTERS,
-                IBinder::FILTERS_INSTANCE, sp_objects_map,
-                up_instances_subscribed_map) {}
+    : Retriever(FILTERED_VERTICAL_ACCELERATION, FILTERS, FILTERS_INSTANCE,
+                sp_objects_map, up_instances_subscribed_map) {}
 
 void FilteredVerticalAccelerationRetriever::retrieve() {
   Values::get_instance().az_f = __sp_attribute_->getValue<double>();
@@ -278,8 +266,7 @@ UpRetriever Retriever::create<FilteredVerticalAccelerationRetriever, 1>(
 ModeRetriever::ModeRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::MODE, IBinder::FLIGHT_MODE,
-                IBinder::FLIGHT_MODE_INSTANCE, sp_objects_map,
+    : Retriever(MODE, FLIGHT_MODE, FLIGHT_MODE_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
 void ModeRetriever::retrieve() {
@@ -299,8 +286,7 @@ UpRetriever Retriever::create<ModeRetriever, 1>(
 AltitudeRefRetriever::AltitudeRefRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::ALTITUDE_REF, IBinder::REFERENCE,
-                IBinder::REFERENCE_INSTANCE, sp_objects_map,
+    : Retriever(ALTITUDE_REF, REFERENCE, REFERENCE_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
 void AltitudeRefRetriever::retrieve() {
@@ -319,9 +305,8 @@ UpRetriever Retriever::create<AltitudeRefRetriever, 1>(
 VerticalSpeedRefRetriever::VerticalSpeedRefRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::VERTICAL_SPEED_REF, IBinder::REFERENCE,
-                IBinder::REFERENCE_INSTANCE, sp_objects_map,
-                up_instances_subscribed_map) {}
+    : Retriever(VERTICAL_SPEED_REF, REFERENCE, REFERENCE_INSTANCE,
+                sp_objects_map, up_instances_subscribed_map) {}
 
 void VerticalSpeedRefRetriever::retrieve() {
   Values::get_instance().vz_c = __sp_attribute_->getValue<double>();
@@ -339,9 +324,8 @@ UpRetriever Retriever::create<VerticalSpeedRefRetriever, 1>(
 TrueAirspeedRefRetriever::TrueAirspeedRefRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::TRUE_AIRSPEED_REF, IBinder::REFERENCE,
-                IBinder::REFERENCE_INSTANCE, sp_objects_map,
-                up_instances_subscribed_map) {}
+    : Retriever(TRUE_AIRSPEED_REF, REFERENCE, REFERENCE_INSTANCE,
+                sp_objects_map, up_instances_subscribed_map) {}
 
 void TrueAirspeedRefRetriever::retrieve() {
   Values::get_instance().va_c = __sp_attribute_->getValue<double>();
@@ -359,9 +343,8 @@ UpRetriever Retriever::create<TrueAirspeedRefRetriever, 1>(
 ThrottleCommandRetriever::ThrottleCommandRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::THROTTLE_COMMAND, IBinder::CONTROL_COMMAND,
-                IBinder::CONTROL_COMMAND_INSTANCE, sp_objects_map,
-                up_instances_subscribed_map) {}
+    : Retriever(THROTTLE_COMMAND, CONTROL_COMMAND, CONTROL_COMMAND_INSTANCE,
+                sp_objects_map, up_instances_subscribed_map) {}
 
 void ThrottleCommandRetriever::retrieve() {
   Values::get_instance().delta_th_c = __sp_attribute_->getValue<double>();
@@ -379,8 +362,8 @@ UpRetriever Retriever::create<ThrottleCommandRetriever, 1>(
 ElevatorDeflectionCommandRetriever::ElevatorDeflectionCommandRetriever(
     MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::ELEVATOR_DEFLECTION_COMMAND, IBinder::CONTROL_COMMAND,
-                IBinder::CONTROL_COMMAND_INSTANCE, sp_objects_map,
+    : Retriever(ELEVATOR_DEFLECTION_COMMAND, CONTROL_COMMAND,
+                CONTROL_COMMAND_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
 void ElevatorDeflectionCommandRetriever::retrieve() {
@@ -399,10 +382,9 @@ UpRetriever Retriever::create<ElevatorDeflectionCommandRetriever, 1>(
 ThrottleCommandPartialRetriever::ThrottleCommandPartialRetriever(
     unsigned int index, MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::THROTTLE_COMMAND_PARTIAL + std::to_string(index),
-                IBinder::CONTROL_COMMAND_PARTIAL,
-                IBinder::CONTROL_COMMAND_PARTIAL_INSTANCE, sp_objects_map,
-                up_instances_subscribed_map),
+    : Retriever(THROTTLE_COMMAND_PARTIAL, CONTROL_COMMAND_PARTIAL,
+                CONTROL_COMMAND_PARTIAL_INSTANCE + std::to_string(index),
+                sp_objects_map, up_instances_subscribed_map),
       __index_(index) {}
 
 void ThrottleCommandPartialRetriever::retrieve() {
@@ -441,10 +423,9 @@ UpRetriever Retriever::create<ThrottleCommandPartialRetriever, 2>(
 RelayThrottleCommandPartialRetriever::RelayThrottleCommandPartialRetriever(
     unsigned int index, MapSpObjects &sp_objects_map,
     MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::RELAY_THROTTLE_COMMAND + std::to_string(index),
-                IBinder::RELAY_CONTROL_COMMAND,
-                IBinder::RELAY_CONTROL_COMMAND_INSTANCE, sp_objects_map,
-                up_instances_subscribed_map),
+    : Retriever(RELAY_THROTTLE_COMMAND, RELAY_CONTROL_COMMAND,
+                RELAY_CONTROL_COMMAND_INSTANCE + std::to_string(index),
+                sp_objects_map, up_instances_subscribed_map),
       __index_(index) {}
 
 void RelayThrottleCommandPartialRetriever::retrieve() {
@@ -488,11 +469,9 @@ ElevatorDeflectionCommandPartialRetriever::
     ElevatorDeflectionCommandPartialRetriever(
         unsigned int index, MapSpObjects &sp_objects_map,
         MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::ELEVATOR_DEFLECTION_COMMAND_PARTIAL +
-                    std::to_string(index),
-                IBinder::CONTROL_COMMAND_PARTIAL,
-                IBinder::CONTROL_COMMAND_PARTIAL_INSTANCE, sp_objects_map,
-                up_instances_subscribed_map),
+    : Retriever(ELEVATOR_DEFLECTION_COMMAND_PARTIAL, CONTROL_COMMAND_PARTIAL,
+                CONTROL_COMMAND_PARTIAL_INSTANCE + std::to_string(index),
+                sp_objects_map, up_instances_subscribed_map),
       __index_(index) {}
 
 void ElevatorDeflectionCommandPartialRetriever::retrieve() {
@@ -532,23 +511,21 @@ RelayElevatorDeflectionCommandPartialRetriever::
     RelayElevatorDeflectionCommandPartialRetriever(
         unsigned int index, MapSpObjects &sp_objects_map,
         MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
-    : Retriever(IBinder::RELAY_ELEVATOR_DEFLECTION_COMMAND +
-                    std::to_string(index),
-                IBinder::RELAY_CONTROL_COMMAND,
-                IBinder::RELAY_CONTROL_COMMAND_INSTANCE, sp_objects_map,
-                up_instances_subscribed_map),
+    : Retriever(RELAY_ELEVATOR_DEFLECTION_COMMAND, RELAY_CONTROL_COMMAND,
+                RELAY_CONTROL_COMMAND_INSTANCE + std::to_string(index),
+                sp_objects_map, up_instances_subscribed_map),
       __index_(index) {}
 
 void RelayElevatorDeflectionCommandPartialRetriever::retrieve() {
   switch (__index_) {
   case 1:
-    Values::get_instance().relay_delta_th_c_1 =
+    Values::get_instance().relay_delta_e_c_1 =
         __sp_attribute_->getValue<bool>()
             ? RROSACE::Cables::RelayState::RROSACE_RELAY_OPENED
             : RROSACE::Cables::RelayState ::RROSACE_RELAY_CLOSED;
     break;
   case 2:
-    Values::get_instance().relay_delta_th_c_2 =
+    Values::get_instance().relay_delta_e_c_2 =
         __sp_attribute_->getValue<bool>()
             ? RROSACE::Cables::RelayState::RROSACE_RELAY_OPENED
             : RROSACE::Cables::RelayState ::RROSACE_RELAY_CLOSED;
