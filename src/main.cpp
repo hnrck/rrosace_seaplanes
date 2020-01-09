@@ -9,9 +9,11 @@
 #include <FederateBuilder.h>
 #include <ModelFactory.h>
 
-int main(int argc, char *argv[]) {
+#include <Values.h>
+
+auto main(int argc, char *argv[]) -> int {
   try {
-    const auto &&configuration = Configuration(argc, argv);
+    const auto &&configuration = Configuration(VecNames(argv, argv + argc));
     std::cout << configuration << std::endl;
 
     auto &&builder = FederateBuilder()

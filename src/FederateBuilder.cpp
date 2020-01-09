@@ -5,38 +5,35 @@
 //! \brief Federate builder body
 
 #include <FederateBuilder.h>
-#include <ModelFactory.h>
 
-FederateBuilder::FederateBuilder() = default;
-FederateBuilder::~FederateBuilder() = default;
-
-FederateBuilder &FederateBuilder::setFederation(const Name &federation) {
+auto FederateBuilder::setFederation(const Name &federation)
+    -> FederateBuilder & {
   __federation_ = federation;
   return *this;
 }
 
-FederateBuilder &FederateBuilder::setFederate(const Name &federate) {
+auto FederateBuilder::setFederate(const Name &federate) -> FederateBuilder & {
   __federate_ = federate;
   return *this;
 }
 
-FederateBuilder &FederateBuilder::setFom(const Name &fom) {
+auto FederateBuilder::setFom(const Name &fom) -> FederateBuilder & {
   __fom_ = fom;
   return *this;
 }
 
-FederateBuilder &
-FederateBuilder::setEndTime(const Seaplanes::SeaplanesTime &endTime) {
+auto FederateBuilder::setEndTime(const Seaplanes::SeaplanesTime &endTime)
+    -> FederateBuilder & {
   __end_time_ = endTime;
   return *this;
 }
 
-FederateBuilder &FederateBuilder::addModel(UpModel &&up_model) {
+auto FederateBuilder::addModel(UpModel &&up_model) -> FederateBuilder & {
   __models_.push_back(std::move(up_model));
   return *this;
 }
 
-UpFederate FederateBuilder::build() {
+auto FederateBuilder::build() -> UpFederate {
   auto dt = std::numeric_limits<double>::max();
 
   for (auto &model : __models_) {

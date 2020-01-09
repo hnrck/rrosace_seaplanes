@@ -27,10 +27,17 @@ private:
 public:
   Federate(Name federation, Name federate, Name fom, VecUpModels up_models,
            Seaplanes::SeaplanesTime end_time, double time_step);
+  ~Federate() = default;
 
-  void localsCalculation() final;
-  void initDumpFiles() final;
-  void dumpValuesInFiles() final;
+  Federate(const Federate &) = delete;
+  auto operator=(const Federate &) = delete;
+
+  Federate(Federate &&) = delete;
+  auto operator=(Federate &&) = delete;
+
+  auto localsCalculation() -> void final;
+  auto initDumpFiles() -> void final;
+  auto dumpValuesInFiles() -> void final;
 };
 
 #endif // RROSACE_SEAPLANES_FEDERATE_H

@@ -33,7 +33,7 @@ Retriever::Retriever(
   up_instance->addAttribute(__sp_attribute_);
 }
 
-void Retriever::sync() { retrieve(); }
+auto Retriever::sync() -> void { retrieve(); }
 
 ThrustRetriever::ThrustRetriever(
     MapSpObjects &sp_objects_map,
@@ -41,14 +41,15 @@ ThrustRetriever::ThrustRetriever(
     : Retriever(ENGINE_THRUST, ENGINE, ENGINE_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
-void ThrustRetriever::retrieve() {
+auto ThrustRetriever::retrieve() -> void {
   Values::get_instance().t = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<ThrustRetriever, 1>(
+auto Retriever::create<ThrustRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class ThrustRetriever>(sp_objects_map,
                                               up_instances_subscribed_map));
@@ -60,14 +61,15 @@ ElevatorDeflectionRetriever::ElevatorDeflectionRetriever(
     : Retriever(ELEVATOR_DEFLECTION, ELEVATOR, ELEVATOR_INSTANCE,
                 sp_objects_map, up_instances_subscribed_map) {}
 
-void ElevatorDeflectionRetriever::retrieve() {
+auto ElevatorDeflectionRetriever::retrieve() -> void {
   Values::get_instance().delta_e = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<ElevatorDeflectionRetriever, 1>(
+auto Retriever::create<ElevatorDeflectionRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class ElevatorDeflectionRetriever>(
           sp_objects_map, up_instances_subscribed_map));
@@ -79,14 +81,15 @@ AltitudeRetriever::AltitudeRetriever(
     : Retriever(ALTITUDE, AIRCRAFT, AIRCRAFT_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
-void AltitudeRetriever::retrieve() {
+auto AltitudeRetriever::retrieve() -> void {
   Values::get_instance().h = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<AltitudeRetriever, 1>(
+auto Retriever::create<AltitudeRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class AltitudeRetriever>(sp_objects_map,
                                                 up_instances_subscribed_map));
@@ -98,14 +101,15 @@ VerticalSpeedRetriever::VerticalSpeedRetriever(
     : Retriever(VERTICAL_SPEED, AIRCRAFT, AIRCRAFT_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
-void VerticalSpeedRetriever::retrieve() {
+auto VerticalSpeedRetriever::retrieve() -> void {
   Values::get_instance().vz = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<VerticalSpeedRetriever, 1>(
+auto Retriever::create<VerticalSpeedRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class VerticalSpeedRetriever>(
           sp_objects_map, up_instances_subscribed_map));
@@ -117,14 +121,15 @@ TrueAirspeedRetriever::TrueAirspeedRetriever(
     : Retriever(TRUE_AIRSPEED, AIRCRAFT, AIRCRAFT_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
-void TrueAirspeedRetriever::retrieve() {
+auto TrueAirspeedRetriever::retrieve() -> void {
   Values::get_instance().va = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<TrueAirspeedRetriever, 1>(
+auto Retriever::create<TrueAirspeedRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class TrueAirspeedRetriever>(
           sp_objects_map, up_instances_subscribed_map));
@@ -136,14 +141,15 @@ PitchRateRetriever::PitchRateRetriever(
     : Retriever(PITCH_RATE, AIRCRAFT, AIRCRAFT_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
-void PitchRateRetriever::retrieve() {
+auto PitchRateRetriever::retrieve() -> void {
   Values::get_instance().q = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<PitchRateRetriever, 1>(
+auto Retriever::create<PitchRateRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class PitchRateRetriever>(sp_objects_map,
                                                  up_instances_subscribed_map));
@@ -155,14 +161,15 @@ VerticalAccelerationRetriever::VerticalAccelerationRetriever(
     : Retriever(VERTICAL_ACCELERATION, AIRCRAFT, AIRCRAFT_INSTANCE,
                 sp_objects_map, up_instances_subscribed_map) {}
 
-void VerticalAccelerationRetriever::retrieve() {
+auto VerticalAccelerationRetriever::retrieve() -> void {
   Values::get_instance().az = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<VerticalAccelerationRetriever, 1>(
+auto Retriever::create<VerticalAccelerationRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class VerticalAccelerationRetriever>(
           sp_objects_map, up_instances_subscribed_map));
@@ -174,14 +181,15 @@ FilteredAltitudeRetriever::FilteredAltitudeRetriever(
     : Retriever(FILTERED_ALTITUDE, FILTERS, FILTERS_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
-void FilteredAltitudeRetriever::retrieve() {
+auto FilteredAltitudeRetriever::retrieve() -> void {
   Values::get_instance().h_f = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<FilteredAltitudeRetriever, 1>(
+auto Retriever::create<FilteredAltitudeRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class FilteredAltitudeRetriever>(
           sp_objects_map, up_instances_subscribed_map));
@@ -193,14 +201,15 @@ FilteredVerticalSpeedRetriever::FilteredVerticalSpeedRetriever(
     : Retriever(FILTERED_VERTICAL_SPEED, FILTERS, FILTERS_INSTANCE,
                 sp_objects_map, up_instances_subscribed_map) {}
 
-void FilteredVerticalSpeedRetriever::retrieve() {
+auto FilteredVerticalSpeedRetriever::retrieve() -> void {
   Values::get_instance().vz_f = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<FilteredVerticalSpeedRetriever, 1>(
+auto Retriever::create<FilteredVerticalSpeedRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class FilteredVerticalSpeedRetriever>(
           sp_objects_map, up_instances_subscribed_map));
@@ -212,14 +221,15 @@ FilteredTrueAirspeedRetriever::FilteredTrueAirspeedRetriever(
     : Retriever(FILTERED_TRUE_AIRSPEED, FILTERS, FILTERS_INSTANCE,
                 sp_objects_map, up_instances_subscribed_map) {}
 
-void FilteredTrueAirspeedRetriever::retrieve() {
+auto FilteredTrueAirspeedRetriever::retrieve() -> void {
   Values::get_instance().va_f = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<FilteredTrueAirspeedRetriever, 1>(
+auto Retriever::create<FilteredTrueAirspeedRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class FilteredTrueAirspeedRetriever>(
           sp_objects_map, up_instances_subscribed_map));
@@ -231,14 +241,15 @@ FilteredPitchRateRetriever::FilteredPitchRateRetriever(
     : Retriever(FILTERED_PITCH_RATE, FILTERS, FILTERS_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
-void FilteredPitchRateRetriever::retrieve() {
+auto FilteredPitchRateRetriever::retrieve() -> void {
   Values::get_instance().q_f = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<FilteredPitchRateRetriever, 1>(
+auto Retriever::create<FilteredPitchRateRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class FilteredPitchRateRetriever>(
           sp_objects_map, up_instances_subscribed_map));
@@ -250,14 +261,15 @@ FilteredVerticalAccelerationRetriever::FilteredVerticalAccelerationRetriever(
     : Retriever(FILTERED_VERTICAL_ACCELERATION, FILTERS, FILTERS_INSTANCE,
                 sp_objects_map, up_instances_subscribed_map) {}
 
-void FilteredVerticalAccelerationRetriever::retrieve() {
+auto FilteredVerticalAccelerationRetriever::retrieve() -> void {
   Values::get_instance().az_f = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<FilteredVerticalAccelerationRetriever, 1>(
+auto Retriever::create<FilteredVerticalAccelerationRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class FilteredVerticalAccelerationRetriever>(
           sp_objects_map, up_instances_subscribed_map));
@@ -269,15 +281,16 @@ ModeRetriever::ModeRetriever(
     : Retriever(MODE, FLIGHT_MODE, FLIGHT_MODE_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
-void ModeRetriever::retrieve() {
+auto ModeRetriever::retrieve() -> void {
   Values::get_instance().mode =
       RROSACE::FlightMode::Mode(__sp_attribute_->getValue<int>());
 }
 
 template <>
-UpRetriever Retriever::create<ModeRetriever, 1>(
+auto Retriever::create<ModeRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class ModeRetriever>(sp_objects_map,
                                             up_instances_subscribed_map));
@@ -289,14 +302,15 @@ AltitudeRefRetriever::AltitudeRefRetriever(
     : Retriever(ALTITUDE_REF, REFERENCE, REFERENCE_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
-void AltitudeRefRetriever::retrieve() {
+auto AltitudeRefRetriever::retrieve() -> void {
   Values::get_instance().h_c = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<AltitudeRefRetriever, 1>(
+auto Retriever::create<AltitudeRefRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class AltitudeRefRetriever>(
           sp_objects_map, up_instances_subscribed_map));
@@ -308,14 +322,15 @@ VerticalSpeedRefRetriever::VerticalSpeedRefRetriever(
     : Retriever(VERTICAL_SPEED_REF, REFERENCE, REFERENCE_INSTANCE,
                 sp_objects_map, up_instances_subscribed_map) {}
 
-void VerticalSpeedRefRetriever::retrieve() {
+auto VerticalSpeedRefRetriever::retrieve() -> void {
   Values::get_instance().vz_c = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<VerticalSpeedRefRetriever, 1>(
+auto Retriever::create<VerticalSpeedRefRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class VerticalSpeedRefRetriever>(
           sp_objects_map, up_instances_subscribed_map));
@@ -327,14 +342,15 @@ TrueAirspeedRefRetriever::TrueAirspeedRefRetriever(
     : Retriever(TRUE_AIRSPEED_REF, REFERENCE, REFERENCE_INSTANCE,
                 sp_objects_map, up_instances_subscribed_map) {}
 
-void TrueAirspeedRefRetriever::retrieve() {
+auto TrueAirspeedRefRetriever::retrieve() -> void {
   Values::get_instance().va_c = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<TrueAirspeedRefRetriever, 1>(
+auto Retriever::create<TrueAirspeedRefRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class TrueAirspeedRefRetriever>(
           sp_objects_map, up_instances_subscribed_map));
@@ -346,14 +362,15 @@ ThrottleCommandRetriever::ThrottleCommandRetriever(
     : Retriever(THROTTLE_COMMAND, CONTROL_COMMAND, CONTROL_COMMAND_INSTANCE,
                 sp_objects_map, up_instances_subscribed_map) {}
 
-void ThrottleCommandRetriever::retrieve() {
+auto ThrottleCommandRetriever::retrieve() -> void {
   Values::get_instance().delta_th_c = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<ThrottleCommandRetriever, 1>(
+auto Retriever::create<ThrottleCommandRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class ThrottleCommandRetriever>(
           sp_objects_map, up_instances_subscribed_map));
@@ -366,14 +383,15 @@ ElevatorDeflectionCommandRetriever::ElevatorDeflectionCommandRetriever(
                 CONTROL_COMMAND_INSTANCE, sp_objects_map,
                 up_instances_subscribed_map) {}
 
-void ElevatorDeflectionCommandRetriever::retrieve() {
+auto ElevatorDeflectionCommandRetriever::retrieve() -> void {
   Values::get_instance().delta_e_c = __sp_attribute_->getValue<double>();
 }
 
 template <>
-UpRetriever Retriever::create<ElevatorDeflectionCommandRetriever, 1>(
+auto Retriever::create<ElevatorDeflectionCommandRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class ElevatorDeflectionCommandRetriever>(
           sp_objects_map, up_instances_subscribed_map));
@@ -387,7 +405,7 @@ ThrottleCommandPartialRetriever::ThrottleCommandPartialRetriever(
                 sp_objects_map, up_instances_subscribed_map),
       __index_(index) {}
 
-void ThrottleCommandPartialRetriever::retrieve() {
+auto ThrottleCommandPartialRetriever::retrieve() -> void {
   switch (__index_) {
   case 1:
     Values::get_instance().delta_th_c_partial_1 =
@@ -403,18 +421,20 @@ void ThrottleCommandPartialRetriever::retrieve() {
 }
 
 template <>
-UpRetriever Retriever::create<ThrottleCommandPartialRetriever, 1>(
+auto Retriever::create<ThrottleCommandPartialRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class ThrottleCommandPartialRetriever>(
           1, sp_objects_map, up_instances_subscribed_map));
 }
 
 template <>
-UpRetriever Retriever::create<ThrottleCommandPartialRetriever, 2>(
+auto Retriever::create<ThrottleCommandPartialRetriever, 2>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class ThrottleCommandPartialRetriever>(
           2, sp_objects_map, up_instances_subscribed_map));
@@ -428,7 +448,7 @@ RelayThrottleCommandPartialRetriever::RelayThrottleCommandPartialRetriever(
                 sp_objects_map, up_instances_subscribed_map),
       __index_(index) {}
 
-void RelayThrottleCommandPartialRetriever::retrieve() {
+auto RelayThrottleCommandPartialRetriever::retrieve() -> void {
   switch (__index_) {
   case 1:
     Values::get_instance().relay_delta_th_c_1 =
@@ -448,18 +468,20 @@ void RelayThrottleCommandPartialRetriever::retrieve() {
 }
 
 template <>
-UpRetriever Retriever::create<RelayThrottleCommandPartialRetriever, 1>(
+auto Retriever::create<RelayThrottleCommandPartialRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class RelayThrottleCommandPartialRetriever>(
           1, sp_objects_map, up_instances_subscribed_map));
 }
 
 template <>
-UpRetriever Retriever::create<RelayThrottleCommandPartialRetriever, 2>(
+auto Retriever::create<RelayThrottleCommandPartialRetriever, 2>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class RelayThrottleCommandPartialRetriever>(
           2, sp_objects_map, up_instances_subscribed_map));
@@ -474,7 +496,7 @@ ElevatorDeflectionCommandPartialRetriever::
                 sp_objects_map, up_instances_subscribed_map),
       __index_(index) {}
 
-void ElevatorDeflectionCommandPartialRetriever::retrieve() {
+auto ElevatorDeflectionCommandPartialRetriever::retrieve() -> void {
   switch (__index_) {
   case 1:
     Values::get_instance().delta_e_c_partial_1 =
@@ -490,18 +512,20 @@ void ElevatorDeflectionCommandPartialRetriever::retrieve() {
 }
 
 template <>
-UpRetriever Retriever::create<ElevatorDeflectionCommandPartialRetriever, 1>(
+auto Retriever::create<ElevatorDeflectionCommandPartialRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class ElevatorDeflectionCommandPartialRetriever>(
           1, sp_objects_map, up_instances_subscribed_map));
 }
 
 template <>
-UpRetriever Retriever::create<ElevatorDeflectionCommandPartialRetriever, 2>(
+auto Retriever::create<ElevatorDeflectionCommandPartialRetriever, 2>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class ElevatorDeflectionCommandPartialRetriever>(
           2, sp_objects_map, up_instances_subscribed_map));
@@ -516,7 +540,7 @@ RelayElevatorDeflectionCommandPartialRetriever::
                 sp_objects_map, up_instances_subscribed_map),
       __index_(index) {}
 
-void RelayElevatorDeflectionCommandPartialRetriever::retrieve() {
+auto RelayElevatorDeflectionCommandPartialRetriever::retrieve() -> void {
   switch (__index_) {
   case 1:
     Values::get_instance().relay_delta_e_c_1 =
@@ -536,20 +560,20 @@ void RelayElevatorDeflectionCommandPartialRetriever::retrieve() {
 }
 
 template <>
-UpRetriever
-Retriever::create<RelayElevatorDeflectionCommandPartialRetriever, 1>(
+auto Retriever::create<RelayElevatorDeflectionCommandPartialRetriever, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class RelayElevatorDeflectionCommandPartialRetriever>(
           1, sp_objects_map, up_instances_subscribed_map));
 }
 
 template <>
-UpRetriever
-Retriever::create<RelayElevatorDeflectionCommandPartialRetriever, 2>(
+auto Retriever::create<RelayElevatorDeflectionCommandPartialRetriever, 2>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesSubscribed &up_instances_subscribed_map) {
+    MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+    -> UpRetriever {
   return static_cast<std::unique_ptr<Retriever> &&>(
       std::make_unique<class RelayElevatorDeflectionCommandPartialRetriever>(
           2, sp_objects_map, up_instances_subscribed_map));

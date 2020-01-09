@@ -20,7 +20,8 @@ using retrieverCreator = UpRetriever (*)(MapSpObjects &,
 class Retriever : public IBinder {
 protected:
   Seaplanes::SpAttribute __sp_attribute_{nullptr};
-  virtual void retrieve() = 0;
+
+  virtual auto retrieve() -> void = 0;
 
 public:
   Retriever(const Name &attribute_name, const Name &object_name,
@@ -28,17 +29,24 @@ public:
             MapUpObjectInstancesSubscribed &up_instances_subscribed_map);
   virtual ~Retriever() override = default;
 
-  void sync() final;
+  Retriever(const Retriever &) = delete;
+  auto operator=(const Retriever &) = delete;
+
+  Retriever(Retriever &&) = default;
+  auto operator=(Retriever &&) -> Retriever & = default;
+
+  auto sync() -> void final;
 
   template <typename T, unsigned int instance>
-  static UpRetriever
+  static auto
   create(MapSpObjects &sp_objects_map,
-         MapUpObjectInstancesSubscribed &up_instances_subscribed_map);
+         MapUpObjectInstancesSubscribed &up_instances_subscribed_map)
+      -> UpRetriever;
 };
 
 class ThrustRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   ThrustRetriever(MapSpObjects &sp_objects_map,
@@ -47,7 +55,7 @@ public:
 
 class ElevatorDeflectionRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   ElevatorDeflectionRetriever(
@@ -57,7 +65,7 @@ public:
 
 class AltitudeRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   AltitudeRetriever(
@@ -67,7 +75,7 @@ public:
 
 class VerticalSpeedRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   VerticalSpeedRetriever(
@@ -77,7 +85,7 @@ public:
 
 class TrueAirspeedRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   TrueAirspeedRetriever(
@@ -87,7 +95,7 @@ public:
 
 class PitchRateRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   PitchRateRetriever(
@@ -97,7 +105,7 @@ public:
 
 class VerticalAccelerationRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   VerticalAccelerationRetriever(
@@ -107,7 +115,7 @@ public:
 
 class FilteredAltitudeRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   FilteredAltitudeRetriever(
@@ -117,7 +125,7 @@ public:
 
 class FilteredVerticalSpeedRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   FilteredVerticalSpeedRetriever(
@@ -127,7 +135,7 @@ public:
 
 class FilteredTrueAirspeedRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   FilteredTrueAirspeedRetriever(
@@ -137,7 +145,7 @@ public:
 
 class FilteredPitchRateRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   FilteredPitchRateRetriever(
@@ -147,7 +155,7 @@ public:
 
 class FilteredVerticalAccelerationRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   FilteredVerticalAccelerationRetriever(
@@ -157,7 +165,7 @@ public:
 
 class ModeRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   ModeRetriever(MapSpObjects &sp_objects_map,
@@ -166,7 +174,7 @@ public:
 
 class AltitudeRefRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   AltitudeRefRetriever(
@@ -176,7 +184,7 @@ public:
 
 class VerticalSpeedRefRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   VerticalSpeedRefRetriever(
@@ -186,7 +194,7 @@ public:
 
 class TrueAirspeedRefRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   TrueAirspeedRefRetriever(
@@ -196,7 +204,7 @@ public:
 
 class ThrottleCommandRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   ThrottleCommandRetriever(
@@ -206,7 +214,7 @@ public:
 
 class ElevatorDeflectionCommandRetriever final : public Retriever {
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   ElevatorDeflectionCommandRetriever(
@@ -219,7 +227,7 @@ private:
   unsigned int __index_;
 
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   ThrottleCommandPartialRetriever(
@@ -232,7 +240,7 @@ private:
   unsigned int __index_;
 
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   RelayThrottleCommandPartialRetriever(
@@ -245,7 +253,7 @@ private:
   unsigned int __index_;
 
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   ElevatorDeflectionCommandPartialRetriever(
@@ -258,7 +266,7 @@ private:
   unsigned int __index_;
 
 protected:
-  void retrieve() final;
+  auto retrieve() -> void final;
 
 public:
   RelayElevatorDeflectionCommandPartialRetriever(

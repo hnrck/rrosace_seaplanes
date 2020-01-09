@@ -15,6 +15,7 @@
 #include <seaplanes.h>
 
 using Name = std::string;
+using VecNames = std::vector<Name>;
 
 using UpFederate = std::unique_ptr<class Federate>;
 

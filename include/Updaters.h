@@ -20,7 +20,8 @@ using updaterCreator = UpUpdater (*)(MapSpObjects &,
 class Updater : public IBinder {
 protected:
   Seaplanes::SpAttribute __sp_attribute_{nullptr};
-  virtual void update() = 0;
+
+  virtual auto update() -> void = 0;
 
 public:
   Updater(const Name &attribute_name, const Name &object_name,
@@ -28,17 +29,23 @@ public:
           MapUpObjectInstancesPublished &up_instances_published_map);
   virtual ~Updater() override = default;
 
-  void sync() final;
+  Updater(const Updater &) = delete;
+  auto operator=(const Updater &) = delete;
+
+  Updater(Updater &&) = default;
+  auto operator=(Updater &&) -> Updater & = default;
+
+  auto sync() -> void final;
 
   template <typename T, unsigned int instance>
-  static UpUpdater
-  create(MapSpObjects &sp_objects_map,
-         MapUpObjectInstancesPublished &up_instances_published_map);
+  static auto create(MapSpObjects &sp_objects_map,
+                     MapUpObjectInstancesPublished &up_instances_published_map)
+      -> UpUpdater;
 };
 
 class ThrustUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   ThrustUpdater(MapSpObjects &sp_objects_map,
@@ -47,7 +54,7 @@ public:
 
 class ElevatorDeflectionUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   ElevatorDeflectionUpdater(
@@ -57,7 +64,7 @@ public:
 
 class AltitudeUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   AltitudeUpdater(MapSpObjects &sp_objects_map,
@@ -66,7 +73,7 @@ public:
 
 class VerticalSpeedUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   VerticalSpeedUpdater(
@@ -76,7 +83,7 @@ public:
 
 class TrueAirspeedUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   TrueAirspeedUpdater(
@@ -86,7 +93,7 @@ public:
 
 class PitchRateUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   PitchRateUpdater(MapSpObjects &sp_objects_map,
@@ -95,7 +102,7 @@ public:
 
 class VerticalAccelerationUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   VerticalAccelerationUpdater(
@@ -105,7 +112,7 @@ public:
 
 class FilteredAltitudeUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   FilteredAltitudeUpdater(
@@ -115,7 +122,7 @@ public:
 
 class FilteredVerticalSpeedUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   FilteredVerticalSpeedUpdater(
@@ -125,7 +132,7 @@ public:
 
 class FilteredTrueAirspeedUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   FilteredTrueAirspeedUpdater(
@@ -135,7 +142,7 @@ public:
 
 class FilteredPitchRateUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   FilteredPitchRateUpdater(
@@ -145,7 +152,7 @@ public:
 
 class FilteredVerticalAccelerationUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   FilteredVerticalAccelerationUpdater(
@@ -155,7 +162,7 @@ public:
 
 class ModeUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   ModeUpdater(MapSpObjects &sp_objects_map,
@@ -164,7 +171,7 @@ public:
 
 class AltitudeRefUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   AltitudeRefUpdater(MapSpObjects &sp_objects_map,
@@ -173,7 +180,7 @@ public:
 
 class VerticalSpeedRefUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   VerticalSpeedRefUpdater(
@@ -183,7 +190,7 @@ public:
 
 class TrueAirspeedRefUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   TrueAirspeedRefUpdater(
@@ -193,7 +200,7 @@ public:
 
 class ThrottleCommandUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   ThrottleCommandUpdater(
@@ -203,7 +210,7 @@ public:
 
 class ElevatorDeflectionCommandUpdater final : public Updater {
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   ElevatorDeflectionCommandUpdater(
@@ -216,7 +223,7 @@ private:
   unsigned int __index_;
 
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   ThrottleCommandPartialUpdater(
@@ -229,7 +236,7 @@ private:
   unsigned int __index_;
 
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   RelayThrottleCommandPartialUpdater(
@@ -242,7 +249,7 @@ private:
   unsigned int __index_;
 
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   ElevatorDeflectionCommandPartialUpdater(
@@ -255,7 +262,7 @@ private:
   unsigned int __index_;
 
 protected:
-  void update() final;
+  auto update() -> void final;
 
 public:
   RelayElevatorDeflectionCommandPartialUpdater(

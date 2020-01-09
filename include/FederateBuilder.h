@@ -21,22 +21,22 @@ private:
   VecUpModels __models_{};
 
 public:
-  FederateBuilder();
-  virtual ~FederateBuilder();
+  FederateBuilder() = default;
+  virtual ~FederateBuilder() = default;
 
   FederateBuilder(const FederateBuilder &) = delete;
-  FederateBuilder &operator=(const FederateBuilder &) = delete;
+  auto operator=(const FederateBuilder &) = delete;
 
   FederateBuilder(FederateBuilder &&) = default;
-  FederateBuilder &operator=(FederateBuilder &&) = default;
+  auto operator=(FederateBuilder &&) -> FederateBuilder & = default;
 
-  FederateBuilder &setFederation(const Name &federation);
-  FederateBuilder &setFederate(const Name &federate);
-  FederateBuilder &setFom(const Name &fom);
-  FederateBuilder &setEndTime(const Seaplanes::SeaplanesTime &endTime);
-  FederateBuilder &addModel(UpModel &&up_model);
+  auto setFederation(const Name &federation) -> FederateBuilder &;
+  auto setFederate(const Name &federate) -> FederateBuilder &;
+  auto setFom(const Name &fom) -> FederateBuilder &;
+  auto setEndTime(const Seaplanes::SeaplanesTime &endTime) -> FederateBuilder &;
+  auto addModel(UpModel &&up_model) -> FederateBuilder &;
 
-  UpFederate build();
+  auto build() -> UpFederate;
 };
 
 #endif // RROSACE_SEAPLANES_FEDERATEBUILDER_H

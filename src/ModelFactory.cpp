@@ -31,10 +31,7 @@ static const std::map<Name, std::pair<std::type_index, unsigned int>>
         {"cables", {typeid(RROSACE::Cables), 1}},
     };
 
-// TODO avoid multiple instantiation
-
-// TODO complete
-template <> UpModel ModelFactory::Generate<RROSACE::Engine, 1>() {
+template <> auto ModelFactory::Generate<RROSACE::Engine, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.delta_th_c_status.set_consumed_flag();
   values.t_status.set_produced_flag();
@@ -42,7 +39,7 @@ template <> UpModel ModelFactory::Generate<RROSACE::Engine, 1>() {
                                            values.t);
 }
 
-template <> UpModel ModelFactory::Generate<RROSACE::Elevator, 1>() {
+template <> auto ModelFactory::Generate<RROSACE::Elevator, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.delta_e_c_status.set_consumed_flag();
   values.delta_e_status.set_produced_flag();
@@ -50,7 +47,8 @@ template <> UpModel ModelFactory::Generate<RROSACE::Elevator, 1>() {
                                              values.delta_e_c, values.delta_e);
 }
 
-template <> UpModel ModelFactory::Generate<RROSACE::FlightDynamics, 1>() {
+template <>
+auto ModelFactory::Generate<RROSACE::FlightDynamics, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.delta_e_status.set_consumed_flag();
   values.t_status.set_consumed_flag();
@@ -64,7 +62,8 @@ template <> UpModel ModelFactory::Generate<RROSACE::FlightDynamics, 1>() {
       values.az);
 }
 
-template <> UpModel ModelFactory::Generate<RROSACE::AltitudeFilter, 1>() {
+template <>
+auto ModelFactory::Generate<RROSACE::AltitudeFilter, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.h_status.set_consumed_flag();
   values.h_f_status.set_produced_flag();
@@ -72,7 +71,7 @@ template <> UpModel ModelFactory::Generate<RROSACE::AltitudeFilter, 1>() {
 }
 
 template <>
-UpModel ModelFactory::Generate<RROSACE::VerticalAirspeedFilter, 1>() {
+auto ModelFactory::Generate<RROSACE::VerticalAirspeedFilter, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.vz_status.set_consumed_flag();
   values.vz_f_status.set_produced_flag();
@@ -80,14 +79,16 @@ UpModel ModelFactory::Generate<RROSACE::VerticalAirspeedFilter, 1>() {
                                                            values.vz_f);
 }
 
-template <> UpModel ModelFactory::Generate<RROSACE::TrueAirspeedFilter, 1>() {
+template <>
+auto ModelFactory::Generate<RROSACE::TrueAirspeedFilter, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.va_status.set_consumed_flag();
   values.va_f_status.set_produced_flag();
   return std::make_unique<RROSACE::TrueAirspeedFilter>(values.va, values.va_f);
 }
 
-template <> UpModel ModelFactory::Generate<RROSACE::PitchRateFilter, 1>() {
+template <>
+auto ModelFactory::Generate<RROSACE::PitchRateFilter, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.q_status.set_consumed_flag();
   values.q_f_status.set_produced_flag();
@@ -95,7 +96,8 @@ template <> UpModel ModelFactory::Generate<RROSACE::PitchRateFilter, 1>() {
 }
 
 template <>
-UpModel ModelFactory::Generate<RROSACE::VerticalAccelerationFilter, 1>() {
+auto ModelFactory::Generate<RROSACE::VerticalAccelerationFilter, 1>()
+    -> UpModel {
   auto &&values = Values::get_instance();
   values.az_status.set_consumed_flag();
   values.az_f_status.set_produced_flag();
@@ -103,13 +105,14 @@ UpModel ModelFactory::Generate<RROSACE::VerticalAccelerationFilter, 1>() {
                                                                values.az_f);
 }
 
-template <> UpModel ModelFactory::Generate<RROSACE::FlightMode, 1>() {
+template <> auto ModelFactory::Generate<RROSACE::FlightMode, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.mode_status.set_produced_flag();
   return std::make_unique<RROSACE::FlightMode>(values.mode, values.mode);
 }
 
-template <> UpModel ModelFactory::Generate<RROSACE::FlightControlUnit, 1>() {
+template <>
+auto ModelFactory::Generate<RROSACE::FlightControlUnit, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.h_c_status.set_produced_flag();
   values.vz_c_status.set_produced_flag();
@@ -120,7 +123,8 @@ template <> UpModel ModelFactory::Generate<RROSACE::FlightControlUnit, 1>() {
 }
 
 template <>
-UpModel ModelFactory::Generate<RROSACE::FlightControlComputerCommand, 1>() {
+auto ModelFactory::Generate<RROSACE::FlightControlComputerCommand, 1>()
+    -> UpModel {
   auto &&values = Values::get_instance();
   values.mode_status.set_consumed_flag();
   values.h_f_status.set_consumed_flag();
@@ -140,7 +144,8 @@ UpModel ModelFactory::Generate<RROSACE::FlightControlComputerCommand, 1>() {
 }
 
 template <>
-UpModel ModelFactory::Generate<RROSACE::FlightControlComputerMonitor, 1>() {
+auto ModelFactory::Generate<RROSACE::FlightControlComputerMonitor, 1>()
+    -> UpModel {
   auto &&values = Values::get_instance();
   values.mode_status.set_consumed_flag();
   values.h_f_status.set_consumed_flag();
@@ -166,7 +171,8 @@ UpModel ModelFactory::Generate<RROSACE::FlightControlComputerMonitor, 1>() {
 }
 
 template <>
-UpModel ModelFactory::Generate<RROSACE::FlightControlComputerCommand, 2>() {
+auto ModelFactory::Generate<RROSACE::FlightControlComputerCommand, 2>()
+    -> UpModel {
   auto &&values = Values::get_instance();
   values.mode_status.set_consumed_flag();
   values.h_f_status.set_consumed_flag();
@@ -186,7 +192,8 @@ UpModel ModelFactory::Generate<RROSACE::FlightControlComputerCommand, 2>() {
 }
 
 template <>
-UpModel ModelFactory::Generate<RROSACE::FlightControlComputerMonitor, 2>() {
+auto ModelFactory::Generate<RROSACE::FlightControlComputerMonitor, 2>()
+    -> UpModel {
   auto &&values = Values::get_instance();
   values.mode_status.set_consumed_flag();
   values.h_f_status.set_consumed_flag();
@@ -211,7 +218,7 @@ UpModel ModelFactory::Generate<RROSACE::FlightControlComputerMonitor, 2>() {
       values.relay_delta_th_c_2, values.master_in_law_2);
 }
 
-template <> UpModel ModelFactory::Generate<RROSACE::Cables, 1>() {
+template <> auto ModelFactory::Generate<RROSACE::Cables, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.delta_e_c_partial_1_status.set_consumed_flag();
   values.delta_th_c_partial_1_status.set_consumed_flag();
@@ -231,7 +238,7 @@ template <> UpModel ModelFactory::Generate<RROSACE::Cables, 1>() {
       values.delta_th_c);
 }
 
-UpModel ModelFactory::Generate(const Name &model_name) {
+auto ModelFactory::Generate(const Name &model_name) -> UpModel {
   try {
 
     auto model_type = NAME_TO_CLASS.at(model_name);

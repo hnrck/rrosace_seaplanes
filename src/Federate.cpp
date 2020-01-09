@@ -44,7 +44,7 @@ Federate::Federate(Name federation, Name federate, Name fom,
   }
 }
 
-void Federate::localsCalculation() {
+auto Federate::localsCalculation() -> void {
   for (auto &retriever : __retrievers_) {
     retriever->sync();
   }
@@ -66,10 +66,10 @@ void Federate::localsCalculation() {
   }
 }
 
-void Federate::initDumpFiles() {
+auto Federate::initDumpFiles() -> void {
   // TODO init dump files
 }
 
-void Federate::dumpValuesInFiles() {
+auto Federate::dumpValuesInFiles() -> void {
   // TODO dump values
 }

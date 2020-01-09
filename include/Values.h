@@ -73,9 +73,9 @@ struct Values final {
       } flags;
     } sf;
 
-    void set_produced_flag() { sf.flags.produced = 1; }
+    auto set_produced_flag() { sf.flags.produced = 1; }
 
-    void set_consumed_flag() { sf.flags.consumed = 1; }
+    auto set_consumed_flag() { sf.flags.consumed = 1; }
   };
 
   Status mode_status{};
@@ -117,10 +117,13 @@ struct Values final {
 
   // TODO maps for dumping values
 
+  ~Values() = default;
+
   Values(const Values &) = delete;
-  Values &operator=(const Values &) = delete;
+  auto operator=(const Values &) = delete;
+
   Values(Values &&) = default;
-  Values &operator=(Values &&) = default;
+  auto operator=(Values &&) -> Values & = default;
 
   static Values &get_instance() {
     static auto &&values = Values();

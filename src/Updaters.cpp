@@ -32,7 +32,7 @@ Updater::Updater(const Name &attribute_name, const Name &object_name,
   up_instance->addAttribute(__sp_attribute_);
 }
 
-void Updater::sync() { update(); }
+auto Updater::sync() -> void { update(); }
 
 ThrustUpdater::ThrustUpdater(
     MapSpObjects &sp_objects_map,
@@ -40,14 +40,14 @@ ThrustUpdater::ThrustUpdater(
     : Updater(ENGINE_THRUST, ENGINE, ENGINE_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
-void ThrustUpdater::update() {
+auto ThrustUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().t);
 }
 
 template <>
-UpUpdater Updater::create<ThrustUpdater, 1>(
+auto Updater::create<ThrustUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class ThrustUpdater>(sp_objects_map,
                                             up_instances_published_map));
@@ -59,14 +59,14 @@ ElevatorDeflectionUpdater::ElevatorDeflectionUpdater(
     : Updater(ELEVATOR_DEFLECTION, ELEVATOR, ELEVATOR_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
-void ElevatorDeflectionUpdater::update() {
+auto ElevatorDeflectionUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().delta_e);
 }
 
 template <>
-UpUpdater Updater::create<ElevatorDeflectionUpdater, 1>(
+auto Updater::create<ElevatorDeflectionUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class ElevatorDeflectionUpdater>(
           sp_objects_map, up_instances_published_map));
@@ -78,14 +78,14 @@ AltitudeUpdater::AltitudeUpdater(
     : Updater(ALTITUDE, AIRCRAFT, AIRCRAFT_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
-void AltitudeUpdater::update() {
+auto AltitudeUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().h);
 }
 
 template <>
-UpUpdater Updater::create<AltitudeUpdater, 1>(
+auto Updater::create<AltitudeUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class AltitudeUpdater>(sp_objects_map,
                                               up_instances_published_map));
@@ -97,14 +97,14 @@ VerticalSpeedUpdater::VerticalSpeedUpdater(
     : Updater(VERTICAL_SPEED, AIRCRAFT, AIRCRAFT_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
-void VerticalSpeedUpdater::update() {
+auto VerticalSpeedUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().vz);
 }
 
 template <>
-UpUpdater Updater::create<VerticalSpeedUpdater, 1>(
+auto Updater::create<VerticalSpeedUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class VerticalSpeedUpdater>(sp_objects_map,
                                                    up_instances_published_map));
@@ -116,14 +116,14 @@ TrueAirspeedUpdater::TrueAirspeedUpdater(
     : Updater(TRUE_AIRSPEED, AIRCRAFT, AIRCRAFT_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
-void TrueAirspeedUpdater::update() {
+auto TrueAirspeedUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().va);
 }
 
 template <>
-UpUpdater Updater::create<TrueAirspeedUpdater, 1>(
+auto Updater::create<TrueAirspeedUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class TrueAirspeedUpdater>(sp_objects_map,
                                                   up_instances_published_map));
@@ -135,14 +135,14 @@ PitchRateUpdater::PitchRateUpdater(
     : Updater(PITCH_RATE, AIRCRAFT, AIRCRAFT_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
-void PitchRateUpdater::update() {
+auto PitchRateUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().q);
 }
 
 template <>
-UpUpdater Updater::create<PitchRateUpdater, 1>(
+auto Updater::create<PitchRateUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class PitchRateUpdater>(sp_objects_map,
                                                up_instances_published_map));
@@ -154,14 +154,14 @@ VerticalAccelerationUpdater::VerticalAccelerationUpdater(
     : Updater(VERTICAL_ACCELERATION, AIRCRAFT, AIRCRAFT_INSTANCE,
               sp_objects_map, up_instances_published_map) {}
 
-void VerticalAccelerationUpdater::update() {
+auto VerticalAccelerationUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().az);
 }
 
 template <>
-UpUpdater Updater::create<VerticalAccelerationUpdater, 1>(
+auto Updater::create<VerticalAccelerationUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class VerticalAccelerationUpdater>(
           sp_objects_map, up_instances_published_map));
@@ -173,14 +173,14 @@ FilteredAltitudeUpdater::FilteredAltitudeUpdater(
     : Updater(FILTERED_ALTITUDE, FILTERS, FILTERS_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
-void FilteredAltitudeUpdater::update() {
+auto FilteredAltitudeUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().h_f);
 }
 
 template <>
-UpUpdater Updater::create<FilteredAltitudeUpdater, 1>(
+auto Updater::create<FilteredAltitudeUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class FilteredAltitudeUpdater>(
           sp_objects_map, up_instances_published_map));
@@ -192,14 +192,14 @@ FilteredVerticalSpeedUpdater::FilteredVerticalSpeedUpdater(
     : Updater(FILTERED_VERTICAL_SPEED, FILTERS, FILTERS_INSTANCE,
               sp_objects_map, up_instances_published_map) {}
 
-void FilteredVerticalSpeedUpdater::update() {
+auto FilteredVerticalSpeedUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().vz_f);
 }
 
 template <>
-UpUpdater Updater::create<FilteredVerticalSpeedUpdater, 1>(
+auto Updater::create<FilteredVerticalSpeedUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class FilteredVerticalSpeedUpdater>(
           sp_objects_map, up_instances_published_map));
@@ -211,14 +211,14 @@ FilteredTrueAirspeedUpdater::FilteredTrueAirspeedUpdater(
     : Updater(FILTERED_TRUE_AIRSPEED, FILTERS, FILTERS_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
-void FilteredTrueAirspeedUpdater::update() {
+auto FilteredTrueAirspeedUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().va_f);
 }
 
 template <>
-UpUpdater Updater::create<FilteredTrueAirspeedUpdater, 1>(
+auto Updater::create<FilteredTrueAirspeedUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class FilteredTrueAirspeedUpdater>(
           sp_objects_map, up_instances_published_map));
@@ -230,14 +230,14 @@ FilteredPitchRateUpdater::FilteredPitchRateUpdater(
     : Updater(FILTERED_PITCH_RATE, FILTERS, FILTERS_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
-void FilteredPitchRateUpdater::update() {
+auto FilteredPitchRateUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().q_f);
 }
 
 template <>
-UpUpdater Updater::create<FilteredPitchRateUpdater, 1>(
+auto Updater::create<FilteredPitchRateUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class FilteredPitchRateUpdater>(
           sp_objects_map, up_instances_published_map));
@@ -249,14 +249,14 @@ FilteredVerticalAccelerationUpdater::FilteredVerticalAccelerationUpdater(
     : Updater(FILTERED_VERTICAL_ACCELERATION, FILTERS, FILTERS_INSTANCE,
               sp_objects_map, up_instances_published_map) {}
 
-void FilteredVerticalAccelerationUpdater::update() {
+auto FilteredVerticalAccelerationUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().az_f);
 }
 
 template <>
-UpUpdater Updater::create<FilteredVerticalAccelerationUpdater, 1>(
+auto Updater::create<FilteredVerticalAccelerationUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class FilteredVerticalAccelerationUpdater>(
           sp_objects_map, up_instances_published_map));
@@ -268,14 +268,14 @@ ModeUpdater::ModeUpdater(
     : Updater(MODE, FLIGHT_MODE, FLIGHT_MODE_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
-void ModeUpdater::update() {
+auto ModeUpdater::update() -> void {
   __sp_attribute_->setValue<int>(static_cast<int>(Values::get_instance().mode));
 }
 
 template <>
-UpUpdater Updater::create<ModeUpdater, 1>(
+auto Updater::create<ModeUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class ModeUpdater>(sp_objects_map,
                                           up_instances_published_map));
@@ -287,14 +287,14 @@ AltitudeRefUpdater::AltitudeRefUpdater(
     : Updater(ALTITUDE_REF, REFERENCE, REFERENCE_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
-void AltitudeRefUpdater::update() {
+auto AltitudeRefUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().h_c);
 }
 
 template <>
-UpUpdater Updater::create<AltitudeRefUpdater, 1>(
+auto Updater::create<AltitudeRefUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class AltitudeRefUpdater>(sp_objects_map,
                                                  up_instances_published_map));
@@ -306,14 +306,14 @@ VerticalSpeedRefUpdater::VerticalSpeedRefUpdater(
     : Updater(VERTICAL_SPEED_REF, REFERENCE, REFERENCE_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
-void VerticalSpeedRefUpdater::update() {
+auto VerticalSpeedRefUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().vz_c);
 }
 
 template <>
-UpUpdater Updater::create<VerticalSpeedRefUpdater, 1>(
+auto Updater::create<VerticalSpeedRefUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class VerticalSpeedRefUpdater>(
           sp_objects_map, up_instances_published_map));
@@ -325,14 +325,14 @@ TrueAirspeedRefUpdater::TrueAirspeedRefUpdater(
     : Updater(TRUE_AIRSPEED_REF, REFERENCE, REFERENCE_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
-void TrueAirspeedRefUpdater::update() {
+auto TrueAirspeedRefUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().va_c);
 }
 
 template <>
-UpUpdater Updater::create<TrueAirspeedRefUpdater, 1>(
+auto Updater::create<TrueAirspeedRefUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class TrueAirspeedRefUpdater>(
           sp_objects_map, up_instances_published_map));
@@ -344,14 +344,14 @@ ThrottleCommandUpdater::ThrottleCommandUpdater(
     : Updater(THROTTLE_COMMAND, CONTROL_COMMAND, CONTROL_COMMAND_INSTANCE,
               sp_objects_map, up_instances_published_map) {}
 
-void ThrottleCommandUpdater::update() {
+auto ThrottleCommandUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().delta_th_c);
 }
 
 template <>
-UpUpdater Updater::create<ThrottleCommandUpdater, 1>(
+auto Updater::create<ThrottleCommandUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class ThrottleCommandUpdater>(
           sp_objects_map, up_instances_published_map));
@@ -364,14 +364,14 @@ ElevatorDeflectionCommandUpdater::ElevatorDeflectionCommandUpdater(
               CONTROL_COMMAND_INSTANCE, sp_objects_map,
               up_instances_published_map) {}
 
-void ElevatorDeflectionCommandUpdater::update() {
+auto ElevatorDeflectionCommandUpdater::update() -> void {
   __sp_attribute_->setValue<double>(Values::get_instance().delta_e_c);
 }
 
 template <>
-UpUpdater Updater::create<ElevatorDeflectionCommandUpdater, 1>(
+auto Updater::create<ElevatorDeflectionCommandUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class ElevatorDeflectionCommandUpdater>(
           sp_objects_map, up_instances_published_map));
@@ -385,7 +385,7 @@ ThrottleCommandPartialUpdater::ThrottleCommandPartialUpdater(
               sp_objects_map, up_instances_published_map),
       __index_(index) {}
 
-void ThrottleCommandPartialUpdater::update() {
+auto ThrottleCommandPartialUpdater::update() -> void {
   switch (__index_) {
   case 1:
     __sp_attribute_->setValue<double>(
@@ -401,18 +401,18 @@ void ThrottleCommandPartialUpdater::update() {
 }
 
 template <>
-UpUpdater Updater::create<ThrottleCommandPartialUpdater, 1>(
+auto Updater::create<ThrottleCommandPartialUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class ThrottleCommandPartialUpdater>(
           1, sp_objects_map, up_instances_published_map));
 }
 
 template <>
-UpUpdater Updater::create<ThrottleCommandPartialUpdater, 2>(
+auto Updater::create<ThrottleCommandPartialUpdater, 2>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class ThrottleCommandPartialUpdater>(
           2, sp_objects_map, up_instances_published_map));
@@ -426,7 +426,7 @@ RelayThrottleCommandPartialUpdater::RelayThrottleCommandPartialUpdater(
               sp_objects_map, up_instances_published_map),
       __index_(index) {}
 
-void RelayThrottleCommandPartialUpdater::update() {
+auto RelayThrottleCommandPartialUpdater::update() -> void {
   switch (__index_) {
   case 1:
     __sp_attribute_->setValue<bool>(
@@ -444,18 +444,18 @@ void RelayThrottleCommandPartialUpdater::update() {
 }
 
 template <>
-UpUpdater Updater::create<RelayThrottleCommandPartialUpdater, 1>(
+auto Updater::create<RelayThrottleCommandPartialUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class RelayThrottleCommandPartialUpdater>(
           1, sp_objects_map, up_instances_published_map));
 }
 
 template <>
-UpUpdater Updater::create<RelayThrottleCommandPartialUpdater, 2>(
+auto Updater::create<RelayThrottleCommandPartialUpdater, 2>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class RelayThrottleCommandPartialUpdater>(
           2, sp_objects_map, up_instances_published_map));
@@ -470,7 +470,7 @@ ElevatorDeflectionCommandPartialUpdater::
               sp_objects_map, up_instances_published_map),
       __index_(index) {}
 
-void ElevatorDeflectionCommandPartialUpdater::update() {
+auto ElevatorDeflectionCommandPartialUpdater::update() -> void {
   switch (__index_) {
   case 1:
     __sp_attribute_->setValue<double>(
@@ -486,18 +486,18 @@ void ElevatorDeflectionCommandPartialUpdater::update() {
 }
 
 template <>
-UpUpdater Updater::create<ElevatorDeflectionCommandPartialUpdater, 1>(
+auto Updater::create<ElevatorDeflectionCommandPartialUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class ElevatorDeflectionCommandPartialUpdater>(
           1, sp_objects_map, up_instances_published_map));
 }
 
 template <>
-UpUpdater Updater::create<ElevatorDeflectionCommandPartialUpdater, 2>(
+auto Updater::create<ElevatorDeflectionCommandPartialUpdater, 2>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class ElevatorDeflectionCommandPartialUpdater>(
           2, sp_objects_map, up_instances_published_map));
@@ -512,7 +512,7 @@ RelayElevatorDeflectionCommandPartialUpdater::
               sp_objects_map, up_instances_published_map),
       __index_(index) {}
 
-void RelayElevatorDeflectionCommandPartialUpdater::update() {
+auto RelayElevatorDeflectionCommandPartialUpdater::update() -> void {
   switch (__index_) {
   case 1:
     __sp_attribute_->setValue<bool>(
@@ -530,18 +530,18 @@ void RelayElevatorDeflectionCommandPartialUpdater::update() {
 }
 
 template <>
-UpUpdater Updater::create<RelayElevatorDeflectionCommandPartialUpdater, 1>(
+auto Updater::create<RelayElevatorDeflectionCommandPartialUpdater, 1>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class RelayElevatorDeflectionCommandPartialUpdater>(
           1, sp_objects_map, up_instances_published_map));
 }
 
 template <>
-UpUpdater Updater::create<RelayElevatorDeflectionCommandPartialUpdater, 2>(
+auto Updater::create<RelayElevatorDeflectionCommandPartialUpdater, 2>(
     MapSpObjects &sp_objects_map,
-    MapUpObjectInstancesPublished &up_instances_published_map) {
+    MapUpObjectInstancesPublished &up_instances_published_map) -> UpUpdater {
   return static_cast<std::unique_ptr<Updater> &&>(
       std::make_unique<class RelayElevatorDeflectionCommandPartialUpdater>(
           2, sp_objects_map, up_instances_published_map));

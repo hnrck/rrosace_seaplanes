@@ -14,27 +14,25 @@
 #include <vector>
 
 #ifndef DEFAULT_END_TIME
-#define DEFAULT_END_TIME (50.)
+constexpr const float DEFAULT_END_TIME = 50.;
 #endif // DEFAULT_END_TIME
 
 using std::vector;
 
-const char *uninitializedConfiguration::what() const noexcept {
+auto uninitializedConfiguration::what() const noexcept -> const char * {
   return "Configuration is not initialized. Make sure to set at least "
          "federation, fom, federate name and one model.";
 }
 
 Configuration::Configuration()
-    : __federation_{}, __fom_{}, __federate_{},
-      __verbose_{false}, __log_{std::clog}, __output_{std::cout}, __models_{},
-      __end_time_(Seaplanes::SeaplanesTime(DEFAULT_END_TIME)),
-      __federation_set_(false), __fom_set_(false) {}
+    : __end_time_(Seaplanes::SeaplanesTime(DEFAULT_END_TIME)) {}
 
-Configuration::Configuration(int argc, char *argv[]) : Configuration() {
-  parse_arguments(argc, argv);
+Configuration::Configuration(const VecNames &vec_args) : Configuration() {
+  parse_arguments(vec_args);
 }
 
-void Configuration::parse_arguments(int argc, char *argv[]) noexcept(false) {
+auto Configuration::parse_arguments(const VecNames &vec_args) noexcept(false)
+    -> void {
   const auto *short_opts = "f:m:n:e:vh";
   const auto long_opts =
       std::vector<option>{{"federation", required_argument, nullptr, 'f'},
@@ -44,6 +42,17 @@ void Configuration::parse_arguments(int argc, char *argv[]) noexcept(false) {
                           {"verbose", no_argument, nullptr, 'v'},
                           {"help", no_argument, nullptr, 'h'},
                           {nullptr, no_argument, nullptr, 0}};
+
+  auto vec_up_args = std::vector<std::unique_ptr<const char[]>>();
+  auto vec_c_args = std::vector<char *>();
+  for (const auto &arg : vec_args) {
+    auto up_c_arg = std::unique_ptr<char[]>(new char[arg.size() + 1]);
+    memcpy(up_c_arg.get(), arg.c_str(), arg.size());
+    vec_c_args.push_back(up_c_arg.get());
+    vec_up_args.push_back(std::move(up_c_arg));
+  }
+  const auto argc = vec_c_args.size();
+  const auto argv = vec_c_args.data();
 
   while (true) {
     const auto option =
@@ -95,43 +104,54 @@ void Configuration::parse_arguments(int argc, char *argv[]) noexcept(false) {
   }
 }
 
-Name Configuration::get_federation() const { return __federation_; }
-Name Configuration::get_fom() const { return __fom_; }
-Name Configuration::get_federate() const { return __federate_; }
-bool Configuration::get_verbose() const { return __verbose_; }
-std::ostream &Configuration::get_log() const { return __log_; }
-std::ostream &Configuration::get_output() const { return __output_; }
-std::vector<Name> Configuration::get_models() const { return __models_; }
-Seaplanes::SeaplanesTime Configuration::get_end_time() const {
+auto Configuration::get_federation() const -> Name { return __federation_; }
+
+auto Configuration::get_fom() const -> Name { return __fom_; }
+
+auto Configuration::get_federate() const -> Name { return __federate_; }
+
+auto Configuration::get_verbose() const -> bool { return __verbose_; }
+
+auto Configuration::get_log() const -> std::ostream & { return __log_; }
+
+auto Configuration::get_output() const -> std::ostream & { return __output_; }
+
+auto Configuration::get_models() const -> std::vector<Name> {
+  return __models_;
+}
+
+auto Configuration::get_end_time() const -> Seaplanes::SeaplanesTime {
   return __end_time_;
 }
 
-std::ostream &operator<<(std::ostream &stream,
-                         const Configuration &configuration) {
-  stream << "Configuration" << std::endl;
+auto operator<<(std::ostream &stream, const Configuration &configuration)
+    -> std::ostream & {
+
   if (!configuration.initialized()) {
-    stream << "\tUninitialized" << std::endl;
-  } else {
-    stream << "\tHLA:" << std::endl;
-    stream << "\t\tfederation:   " << configuration.__federation_ << std::endl;
-    stream << "\t\tFOM:          " << configuration.__fom_ << std::endl;
-    stream << "\t\tfederate:     " << configuration.__federate_ << std::endl;
-
-    stream << "\tSeaplanes:" << std::endl;
-    stream << "\t\tdeadline:     " << configuration.__end_time_ << std::endl;
-    stream << "\t\tverbose:      " << std::boolalpha << configuration.__verbose_
-
-           << std::endl;
-    stream << "\t\tmodels:" << std::endl << "\t\t\t";
-    std::copy(configuration.__models_.begin(), configuration.__models_.end(),
-              std::ostream_iterator<Name>(std::cout, " "));
-    stream << std::endl;
+    throw(std::runtime_error("Configuration uninitialized"));
   }
+
+  stream << "Configuration" << std::endl;
+  stream << "\tHLA:" << std::endl;
+  stream << "\t\tfederation:   " << configuration.__federation_ << std::endl;
+  stream << "\t\tFOM:          " << configuration.__fom_ << std::endl;
+  stream << "\t\tfederate:     " << configuration.__federate_ << std::endl;
+
+  stream << "\tSeaplanes:" << std::endl;
+  stream << "\t\tdeadline:     " << configuration.__end_time_ << std::endl;
+  stream << "\t\tverbose:      " << std::boolalpha << configuration.__verbose_
+
+         << std::endl;
+  stream << "\t\tmodels:" << std::endl << "\t\t\t";
+  std::copy(configuration.__models_.begin(), configuration.__models_.end(),
+            std::ostream_iterator<Name>(std::cout, " "));
+  stream << std::endl;
+
   return (stream);
 }
 
-void Configuration::print_help(const char exec_name[],
-                               std::ostream &stream) const {
+auto Configuration::print_help(const Name &exec_name,
+                               std::ostream &stream) const -> void {
   stream << "Configuration module:" << std::endl;
   stream << std::endl;
 
@@ -155,7 +175,7 @@ void Configuration::print_help(const char exec_name[],
   stream << exec_name << " -- fcc1a fcc1b" << std::endl;
 }
 
-bool Configuration::initialized() const {
+auto Configuration::initialized() const -> bool {
   return (__federation_set_ && __fom_set_ && __federate_set_ &&
           !__models_.empty());
 }

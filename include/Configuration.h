@@ -10,6 +10,7 @@
 // #include <LogicalProcessorCommon.h>
 #include <Common.h>
 #include <SeaplanesTime.h>
+
 #include <rrosace.h>
 
 #include <exception>
@@ -17,51 +18,53 @@
 
 class uninitializedConfiguration final : public std::exception {
 public:
-  virtual const char *what() const noexcept;
+  auto what() const noexcept -> const char * override;
 };
 
 class Configuration final {
 public:
   Configuration();
-  Configuration(int argc, char *argv[]);
+  explicit Configuration(const VecNames &vec_args);
   ~Configuration() = default;
+
   Configuration(const Configuration &) = default;
-  Configuration &operator=(const Configuration &) = delete;
+  auto operator=(const Configuration &) = delete;
+
   Configuration(Configuration &&) = delete;
-  Configuration &operator=(Configuration &&) = delete;
+  auto operator=(Configuration &&) = delete;
 
-  void parse_arguments(int argc, char *argv[]) noexcept(false);
-  void print_help(const char exec_name[], std::ostream &stream) const;
+  auto parse_arguments(const VecNames &vec_args) noexcept(false) -> void;
+  auto print_help(const Name &exec_name, std::ostream &stream) const -> void;
 
-  friend std::ostream &operator<<(std::ostream &stream,
-                                  const Configuration &configuration);
+  friend auto operator<<(std::ostream &stream,
+                         const Configuration &configuration) -> std::ostream &;
 
-  Name get_federation() const;
-  Name get_fom() const;
-  Name get_federate() const;
-  bool get_verbose() const;
-  std::ostream &get_log() const;
-  std::ostream &get_output() const;
-  std::vector<Name> get_models() const;
+  auto get_federation() const -> Name;
+  auto get_fom() const -> Name;
+  auto get_federate() const -> Name;
+  auto get_verbose() const -> bool;
+  auto get_log() const -> std::ostream &;
+  auto get_output() const -> std::ostream &;
+  auto get_models() const -> std::vector<Name>;
 
   Seaplanes::SeaplanesTime get_end_time() const;
 
 private:
-  Name __federation_;
-  Name __fom_;
-  Name __federate_;
-  bool __verbose_;
-  std::ostream &__log_;
-  std::ostream &__output_;
-  std::vector<Name> __models_;
+  Name __federation_{};
+  Name __fom_{};
+  Name __federate_{};
+  bool __verbose_{false};
+  std::ostream &__log_{std::clog};
+  std::ostream &__output_{std::cout};
+  std::vector<Name> __models_{};
 
   Seaplanes::SeaplanesTime __end_time_;
 
-  bool __federation_set_;
-  bool __fom_set_;
-  bool __federate_set_;
+  bool __federation_set_{false};
+  bool __fom_set_{false};
+  bool __federate_set_{false};
 
-  bool initialized() const;
+  auto initialized() const -> bool;
 };
 
 #endif // CONFIGURATION_H

@@ -13,10 +13,18 @@
 
 class ModelFactory {
 private:
-  template <class T, unsigned int instance> static UpModel Generate();
+  template <class T, unsigned int instance> static auto Generate() -> UpModel;
 
 public:
   ModelFactory() = delete;
+  ~ModelFactory() = delete;
+
+  ModelFactory(const ModelFactory &) = delete;
+  auto operator=(const ModelFactory &) = delete;
+
+  ModelFactory(ModelFactory &&) = default;
+  auto operator=(ModelFactory &&) -> ModelFactory & = default;
+
   static UpModel Generate(const Name &model_name);
 };
 
