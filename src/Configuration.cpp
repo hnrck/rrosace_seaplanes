@@ -39,13 +39,14 @@ Configuration::~Configuration() {
 
 auto Configuration::parse_arguments(const VecNames &vec_args) noexcept(false)
     -> void {
-  const auto *short_opts = "f:m:n:e:o:vh";
+  const auto *short_opts = "f:m:n:e:o:pvh";
   const auto long_opts =
       std::vector<option>{{"federation", required_argument, nullptr, 'f'},
                           {"fom", required_argument, nullptr, 'm'},
                           {"name", required_argument, nullptr, 'n'},
                           {"end", required_argument, nullptr, 'e'},
                           {"output", required_argument, nullptr, 'o'},
+                          {"progression", no_argument, nullptr, 'p'},
                           {"verbose", no_argument, nullptr, 'v'},
                           {"help", no_argument, nullptr, 'h'},
                           {nullptr, no_argument, nullptr, 0}};
@@ -95,6 +96,10 @@ auto Configuration::parse_arguments(const VecNames &vec_args) noexcept(false)
       __p_output_ = &__output_file_;
       break;
 
+    case 'p':
+      __progression_ = true;
+      break;
+
     case 'v':
       __verbose_ = true;
       break;
@@ -122,6 +127,8 @@ auto Configuration::get_federation() const -> Name { return __federation_; }
 auto Configuration::get_fom() const -> Name { return __fom_; }
 
 auto Configuration::get_federate() const -> Name { return __federate_; }
+
+auto Configuration::get_progression() const -> bool { return __progression_; }
 
 auto Configuration::get_verbose() const -> bool { return __verbose_; }
 

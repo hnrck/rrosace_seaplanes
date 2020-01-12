@@ -19,6 +19,7 @@ private:
   Seaplanes::SeaplanesTime __end_time_{0.};
   std::ostream *__p_log_{nullptr};
   std::ostream *__p_output_{&std::cout};
+  bool __progression_{false};
 
   VecUpModels __models_{};
 
@@ -38,6 +39,7 @@ public:
   auto setEndTime(const Seaplanes::SeaplanesTime &endTime) -> FederateBuilder &;
   auto setLogPointer(std::ostream *p_log) -> FederateBuilder &;
   auto setOutputPointer(std::ostream *p_output) -> FederateBuilder &;
+  auto setPrintProgression() -> FederateBuilder &;
   auto addModel(UpModel &&up_model) -> FederateBuilder &;
 
   auto build() -> UpFederate;

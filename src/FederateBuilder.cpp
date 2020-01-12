@@ -35,8 +35,14 @@ auto FederateBuilder::setLogPointer(ostream *p_log) -> FederateBuilder & {
   return *this;
 }
 
-auto FederateBuilder::setOutputPointer(std::ostream *p_output) -> FederateBuilder & {
+auto FederateBuilder::setOutputPointer(std::ostream *p_output)
+    -> FederateBuilder & {
   __p_output_ = p_output;
+  return *this;
+}
+
+auto FederateBuilder::setPrintProgression() -> FederateBuilder & {
+  __progression_ = true;
   return *this;
 }
 
@@ -54,7 +60,8 @@ auto FederateBuilder::build() -> UpFederate {
     }
   }
 
-  return std::make_unique<Federate>(
-      std::move(__federation_), std::move(__federate_), std::move(__fom_),
-      std::move(__models_), __end_time_, __p_log_, __p_output_, dt);
+  return std::make_unique<Federate>(std::move(__federation_),
+                                    std::move(__federate_), std::move(__fom_),
+                                    std::move(__models_), __end_time_, __p_log_,
+                                    __p_output_, dt, __progression_);
 }

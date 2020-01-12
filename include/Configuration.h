@@ -39,6 +39,7 @@ public:
   auto get_federation() const -> Name;
   auto get_fom() const -> Name;
   auto get_federate() const -> Name;
+  auto get_progression() const -> bool;
   auto get_verbose() const -> bool;
   auto get_log_pointer() const -> std::ostream *;
   auto get_output_pointer() const -> std::ostream *;
@@ -50,6 +51,7 @@ private:
   Name __federation_{};
   Name __fom_{};
   Name __federate_{};
+  bool __progression_{false};
   bool __verbose_{false};
   std::ostream *const __p_log_{&std::clog};
   std::ostream *__p_output_{&std::cout};

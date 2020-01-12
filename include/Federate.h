@@ -27,11 +27,12 @@ private:
   VecUpUpdaters __updaters_{};
 
   std::ostream *__p_output_;
+  bool __progression_;
 
 public:
   Federate(Name federation, Name federate, Name fom, VecUpModels up_models,
            Seaplanes::SeaplanesTime end_time, std::ostream *p_log,
-           std::ostream *p_output, double time_step);
+           std::ostream *p_output, double time_step, bool progression = false);
   ~Federate() = default;
 
   Federate(const Federate &) = delete;

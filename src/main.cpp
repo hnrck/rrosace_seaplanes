@@ -23,6 +23,10 @@ auto main(int argc, char *argv[]) -> int {
                          .setEndTime(configuration.get_end_time())
                          .setOutputPointer(configuration.get_output_pointer());
 
+    if (configuration.get_progression()) {
+      builder.setPrintProgression();
+    }
+
     if (configuration.get_verbose()) {
       builder.setLogPointer(configuration.get_log_pointer());
     }

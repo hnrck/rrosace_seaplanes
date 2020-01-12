@@ -12,11 +12,13 @@ using std::ostream;
 
 Federate::Federate(Name federation, Name federate, Name fom,
                    VecUpModels up_models, Seaplanes::SeaplanesTime end_time,
-                   ostream *p_log, ostream *p_output, double time_step)
+                   ostream *p_log, ostream *p_output, double time_step,
+                   bool progression)
     : Seaplanes::ProtoLogicalProcessor(
           std::move(federation), std::move(federate), std::move(fom),
           end_time.get_s(), time_step, time_step, p_log),
-      __up_models_{std::move(up_models)}, __p_output_{p_output} {
+      __up_models_{std::move(up_models)}, __p_output_{p_output},
+      __progression_{progression} {
 
   for (auto &status_creators_tuple :
        Values::get_instance().status_creators_tuples_array) {
@@ -70,6 +72,10 @@ auto Federate::localsCalculation() -> void {
 
   for (auto &updater : __updaters_) {
     updater->sync();
+  }
+
+  if (__progression_) {
+    printProgression();
   }
 
   if (__p_output_ != nullptr) {
