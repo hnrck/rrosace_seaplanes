@@ -51,7 +51,7 @@ private:
   Name __fom_{};
   Name __federate_{};
   bool __verbose_{false};
-  std::ostream *__p_log_{&std::clog};
+  std::ostream *const __p_log_{&std::clog};
   std::ostream *__p_output_{&std::cout};
   std::fstream __output_file_{};
   std::vector<Name> __models_{};

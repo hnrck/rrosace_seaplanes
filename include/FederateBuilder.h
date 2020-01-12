@@ -17,7 +17,7 @@ private:
   Name __federate_{};
   Name __fom_{};
   Seaplanes::SeaplanesTime __end_time_{0.};
-  std::ostream *__p_log_{&std::clog};
+  std::ostream *__p_log_{nullptr};
   std::ostream *__p_output_{&std::cout};
 
   VecUpModels __models_{};
