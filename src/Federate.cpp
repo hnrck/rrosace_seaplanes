@@ -67,11 +67,3 @@ auto Federate::localsCalculation() -> void {
     updater->sync();
   }
 }
-
-auto Federate::initDumpFiles() -> void {
-  // TODO init dump files
-}
-
-auto Federate::dumpValuesInFiles() -> void {
-  // TODO dump values
-}

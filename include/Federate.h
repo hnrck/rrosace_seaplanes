@@ -38,8 +38,6 @@ public:
   auto operator=(Federate &&) = delete;
 
   auto localsCalculation() -> void final;
-  auto initDumpFiles() -> void final;
-  auto dumpValuesInFiles() -> void final;
 };
 
 #endif // RROSACE_SEAPLANES_FEDERATE_H
