@@ -48,6 +48,7 @@ auto Configuration::parse_arguments(const VecNames &vec_args) noexcept(false)
   for (const auto &arg : vec_args) {
     auto up_c_arg = std::unique_ptr<char[]>(new char[arg.size() + 1]);
     memcpy(up_c_arg.get(), arg.c_str(), arg.size());
+    up_c_arg[arg.size()] = '\0';
     vec_c_args.push_back(up_c_arg.get());
     vec_up_args.push_back(std::move(up_c_arg));
   }
