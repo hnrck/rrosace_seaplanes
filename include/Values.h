@@ -65,6 +65,7 @@ struct Values final {
       SUBSCRIBE = 2,
       LOCAL = 3,
     } state;
+
     union state_flags {
       State state{IGNORED};
       struct Flags {
@@ -73,9 +74,8 @@ struct Values final {
       } flags;
     } sf;
 
-    auto set_produced_flag() { sf.flags.produced = 1; }
-
-    auto set_consumed_flag() { sf.flags.consumed = 1; }
+    auto set_produced_flag() -> void;
+    auto set_consumed_flag() -> void;
   };
 
   Status mode_status{};
@@ -115,7 +115,25 @@ struct Values final {
 
   StatusCreatorsTuplesArray status_creators_tuples_array;
 
-  // TODO maps for dumping values
+  struct Output final {
+    enum OutputType : uint8_t {
+      INT = 0,
+      DOUBLE = 1,
+      BOOL = 2,
+    } output_type;
+    void *p_value;
+    Name name;
+    Name abbreviation;
+    Name dimension;
+
+    auto legend() const -> std::string;
+    auto to_string() const -> std::string;
+  };
+
+  using StatusOutputTuple = std::tuple<Values::Status &, Output>;
+  using StatusOutputTuplesArray = std::array<StatusOutputTuple, 26>;
+
+  StatusOutputTuplesArray status_output_tuples_array;
 
   ~Values() = default;
 
@@ -125,10 +143,11 @@ struct Values final {
   Values(Values &&) = default;
   auto operator=(Values &&) -> Values & = default;
 
-  static Values &get_instance() {
-    static auto &&values = Values();
-    return values;
-  }
+  static auto get_instance() -> Values &;
+
+  auto legend() const -> std::string;
+  auto header_line() const -> std::string;
+  auto to_string() const -> std::string;
 
 private:
   Values();
