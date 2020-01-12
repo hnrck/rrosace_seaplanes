@@ -14,9 +14,9 @@
 
 #include <rrosace.h>
 
-#define H_C (RROSACE::H_EQ)
-#define VZ_C (2.5)
-#define VA_C (RROSACE::VA_EQ)
+static constexpr const double H_C = RROSACE::H_EQ;
+static constexpr const double VZ_C = 2.5;
+static constexpr const double VA_C = RROSACE::VA_EQ;
 
 struct Values final {
   RROSACE::FlightMode::Mode mode{RROSACE::FlightMode::Mode::RROSACE_COMMANDED};
