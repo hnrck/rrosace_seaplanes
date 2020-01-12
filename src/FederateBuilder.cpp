@@ -30,9 +30,9 @@ auto FederateBuilder::setEndTime(const Seaplanes::SeaplanesTime &endTime)
   return *this;
 }
 
-auto FederateBuilder::setLog(ostream &log)
+auto FederateBuilder::setLogPointer(ostream *p_log)
 -> FederateBuilder & {
-  __p_log_ = &log;
+  __p_log_ = p_log;
   return *this;
 }
 

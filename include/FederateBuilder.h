@@ -35,7 +35,7 @@ public:
   auto setFederate(const Name &federate) -> FederateBuilder &;
   auto setFom(const Name &fom) -> FederateBuilder &;
   auto setEndTime(const Seaplanes::SeaplanesTime &endTime) -> FederateBuilder &;
-  auto setLog(std::ostream &log) -> FederateBuilder &;
+  auto setLogPointer(std::ostream *p_log) -> FederateBuilder &;
   auto addModel(UpModel &&up_model) -> FederateBuilder &;
 
   auto build() -> UpFederate;

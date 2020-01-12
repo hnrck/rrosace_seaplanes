@@ -31,6 +31,12 @@ Configuration::Configuration(const VecNames &vec_args) : Configuration() {
   parse_arguments(vec_args);
 }
 
+Configuration::~Configuration() {
+  if (__output_file_.is_open()) {
+    __output_file_.close();
+  }
+}
+
 auto Configuration::parse_arguments(const VecNames &vec_args) noexcept(false)
     -> void {
   const auto *short_opts = "f:m:n:e:vh";
@@ -113,9 +119,13 @@ auto Configuration::get_federate() const -> Name { return __federate_; }
 
 auto Configuration::get_verbose() const -> bool { return __verbose_; }
 
-auto Configuration::get_log() const -> std::ostream & { return __log_; }
+auto Configuration::get_log_pointer() const -> std::ostream * {
+  return __p_log_;
+}
 
-auto Configuration::get_output() const -> std::ostream & { return __output_; }
+auto Configuration::get_output_pointer() const -> std::ostream * {
+  return __p_output_;
+}
 
 auto Configuration::get_models() const -> std::vector<Name> {
   return __models_;

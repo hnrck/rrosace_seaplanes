@@ -21,7 +21,7 @@ auto main(int argc, char *argv[]) -> int {
                          .setFom(configuration.get_fom())
                          .setFederate(configuration.get_federate())
                          .setEndTime(configuration.get_end_time())
-                         .setLog(configuration.get_log());
+                         .setLogPointer(configuration.get_log_pointer());
 
     for (const auto &model_name : configuration.get_models()) {
       builder.addModel(ModelFactory::Generate(model_name));

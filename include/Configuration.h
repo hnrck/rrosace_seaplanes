@@ -14,6 +14,7 @@
 #include <rrosace.h>
 
 #include <exception>
+#include <fstream>
 #include <iostream>
 
 class uninitializedConfiguration final : public std::exception {
@@ -25,12 +26,12 @@ class Configuration final {
 public:
   Configuration();
   explicit Configuration(const VecNames &vec_args);
-  ~Configuration() = default;
+  ~Configuration();
 
-  Configuration(const Configuration &) = default;
+  Configuration(const Configuration &) = delete;
   auto operator=(const Configuration &) = delete;
 
-  Configuration(Configuration &&) = delete;
+  Configuration(Configuration &&) = default;
   auto operator=(Configuration &&) = delete;
 
   auto parse_arguments(const VecNames &vec_args) noexcept(false) -> void;
@@ -43,8 +44,8 @@ public:
   auto get_fom() const -> Name;
   auto get_federate() const -> Name;
   auto get_verbose() const -> bool;
-  auto get_log() const -> std::ostream &;
-  auto get_output() const -> std::ostream &;
+  auto get_log_pointer() const -> std::ostream *;
+  auto get_output_pointer() const -> std::ostream *;
   auto get_models() const -> std::vector<Name>;
 
   Seaplanes::SeaplanesTime get_end_time() const;
@@ -54,8 +55,9 @@ private:
   Name __fom_{};
   Name __federate_{};
   bool __verbose_{false};
-  std::ostream &__log_{std::clog};
-  std::ostream &__output_{std::cout};
+  std::ostream *__p_log_{&std::clog};
+  std::ostream *__p_output_{&std::cout};
+  std::fstream __output_file_{};
   std::vector<Name> __models_{};
 
   Seaplanes::SeaplanesTime __end_time_;
