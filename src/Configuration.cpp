@@ -39,12 +39,13 @@ Configuration::~Configuration() {
 
 auto Configuration::parse_arguments(const VecNames &vec_args) noexcept(false)
     -> void {
-  const auto *short_opts = "f:m:n:e:vh";
+  const auto *short_opts = "f:m:n:e:o:vh";
   const auto long_opts =
       std::vector<option>{{"federation", required_argument, nullptr, 'f'},
                           {"fom", required_argument, nullptr, 'm'},
                           {"name", required_argument, nullptr, 'n'},
                           {"end", required_argument, nullptr, 'e'},
+                          {"output", required_argument, nullptr, 'o'},
                           {"verbose", no_argument, nullptr, 'v'},
                           {"help", no_argument, nullptr, 'h'},
                           {nullptr, no_argument, nullptr, 0}};
@@ -87,6 +88,11 @@ auto Configuration::parse_arguments(const VecNames &vec_args) noexcept(false)
 
     case 'e':
       __end_time_ = Seaplanes::SeaplanesTime(optarg);
+      break;
+
+    case 'o':
+      __output_file_.open(optarg, std::ofstream::out);
+      __p_output_ = &__output_file_;
       break;
 
     case 'v':
