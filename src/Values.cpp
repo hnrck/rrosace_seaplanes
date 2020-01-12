@@ -250,8 +250,8 @@ auto Values::legend() const -> string {
 }
 
 auto Values::header_line() const -> string {
-  auto str = string();
-  auto delimiter = "# ";
+  auto str = string("# t, ");
+  auto delimiter = string();
   for (auto &status_output_tuple : status_output_tuples_array) {
     auto &status = get<0>(status_output_tuple);
     auto &output = get<1>(status_output_tuple);
@@ -263,9 +263,9 @@ auto Values::header_line() const -> string {
   return str;
 }
 
-auto Values::to_string() const -> string {
-  auto str = string();
-  auto delimiter = "# ";
+auto Values::to_string(double time) const -> string {
+  auto str = string("# " + std::to_string(time) + ", ");
+  auto delimiter = string();
   for (auto &status_output_tuple : status_output_tuples_array) {
     auto &status = get<0>(status_output_tuple);
     auto &output = get<1>(status_output_tuple);

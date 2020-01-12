@@ -26,9 +26,12 @@ private:
   VecUpRetrievers __retrievers_{};
   VecUpUpdaters __updaters_{};
 
+  std::ostream *__p_output_;
+
 public:
   Federate(Name federation, Name federate, Name fom, VecUpModels up_models,
-           Seaplanes::SeaplanesTime end_time, std::ostream *p_log, double time_step);
+           Seaplanes::SeaplanesTime end_time, std::ostream *p_log,
+           std::ostream *p_output, double time_step);
   ~Federate() = default;
 
   Federate(const Federate &) = delete;

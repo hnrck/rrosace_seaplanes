@@ -147,7 +147,7 @@ struct Values final {
 
   auto legend() const -> std::string;
   auto header_line() const -> std::string;
-  auto to_string() const -> std::string;
+  auto to_string(double time) const -> std::string;
 
 private:
   Values();
