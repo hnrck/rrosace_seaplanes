@@ -7,11 +7,7 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
 
-// #include <LogicalProcessorCommon.h>
 #include <Common.h>
-#include <SeaplanesTime.h>
-
-#include <rrosace.h>
 
 #include <exception>
 #include <fstream>
