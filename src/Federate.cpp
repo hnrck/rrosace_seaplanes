@@ -8,12 +8,14 @@
 #include <Federate.h>
 #include <Values.h>
 
+using std::ostream;
+
 Federate::Federate(Name federation, Name federate, Name fom,
                    VecUpModels up_models, Seaplanes::SeaplanesTime end_time,
-                   double time_step)
+                   ostream *p_log, double time_step)
     : Seaplanes::ProtoLogicalProcessor(
           std::move(federation), std::move(federate), std::move(fom),
-          end_time.get_s(), time_step, time_step, Name()),
+          end_time.get_s(), time_step, time_step, p_log),
       __up_models_{std::move(up_models)} {
 
   for (auto &status_creators_tuple :

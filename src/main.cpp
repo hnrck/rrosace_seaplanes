@@ -20,7 +20,8 @@ auto main(int argc, char *argv[]) -> int {
                          .setFederation(configuration.get_federation())
                          .setFom(configuration.get_fom())
                          .setFederate(configuration.get_federate())
-                         .setEndTime(configuration.get_end_time());
+                         .setEndTime(configuration.get_end_time())
+                         .setLog(configuration.get_log());
 
     for (const auto &model_name : configuration.get_models()) {
       builder.addModel(ModelFactory::Generate(model_name));

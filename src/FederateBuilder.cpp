@@ -6,6 +6,8 @@
 
 #include <FederateBuilder.h>
 
+using std::ostream;
+
 auto FederateBuilder::setFederation(const Name &federation)
     -> FederateBuilder & {
   __federation_ = federation;
@@ -28,6 +30,12 @@ auto FederateBuilder::setEndTime(const Seaplanes::SeaplanesTime &endTime)
   return *this;
 }
 
+auto FederateBuilder::setLog(ostream &log)
+-> FederateBuilder & {
+  __p_log_ = &log;
+  return *this;
+}
+
 auto FederateBuilder::addModel(UpModel &&up_model) -> FederateBuilder & {
   __models_.push_back(std::move(up_model));
   return *this;
@@ -44,5 +52,5 @@ auto FederateBuilder::build() -> UpFederate {
 
   return std::make_unique<Federate>(std::move(__federation_),
                                     std::move(__federate_), std::move(__fom_),
-                                    std::move(__models_), __end_time_, dt);
+                                    std::move(__models_), __end_time_, __p_log_, dt);
 }

@@ -13,6 +13,8 @@
 #include <Retrievers.h>
 #include <Updaters.h>
 
+#include <ostream>
+
 class Federate final : public Seaplanes::ProtoLogicalProcessor {
 private:
   VecUpModels __up_models_;
@@ -26,7 +28,7 @@ private:
 
 public:
   Federate(Name federation, Name federate, Name fom, VecUpModels up_models,
-           Seaplanes::SeaplanesTime end_time, double time_step);
+           Seaplanes::SeaplanesTime end_time, std::ostream *p_log, double time_step);
   ~Federate() = default;
 
   Federate(const Federate &) = delete;

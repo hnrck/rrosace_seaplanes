@@ -17,6 +17,7 @@ private:
   Name __federate_{};
   Name __fom_{};
   Seaplanes::SeaplanesTime __end_time_{0.};
+  std::ostream *__p_log_;
 
   VecUpModels __models_{};
 
@@ -34,6 +35,7 @@ public:
   auto setFederate(const Name &federate) -> FederateBuilder &;
   auto setFom(const Name &fom) -> FederateBuilder &;
   auto setEndTime(const Seaplanes::SeaplanesTime &endTime) -> FederateBuilder &;
+  auto setLog(std::ostream &log) -> FederateBuilder &;
   auto addModel(UpModel &&up_model) -> FederateBuilder &;
 
   auto build() -> UpFederate;
