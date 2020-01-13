@@ -180,23 +180,34 @@ auto Configuration::print_help(const Name &exec_name,
   stream << std::endl;
 
   stream << "Mandatory:" << std::endl;
-  stream << "\t--federation, -f <federation>: Set the Federation" << std::endl;
-  stream << "\t--fom,        -m <fom>:        Set the FOM" << std::endl;
-  stream << "\t--name, -n <name>:             Set the federate name"
+  stream << "\t--federation,  -f <federation>:  Set the Federation"
+         << std::endl;
+  stream << "\t--fom,         -m <fom>:         Set the FOM" << std::endl;
+  stream << "\t--name,        -n <name>:        Set the federate name"
          << std::endl;
   stream << std::endl;
-  stream << "\t-- <model 1> [ ... ]:          Set the models to schedule"
+  stream << "\t-- <model 1> [ <model 2> ... ]:  Set the models to schedule"
          << std::endl;
   stream << std::endl;
   stream << std::endl;
 
   stream << "Optional:" << std::endl;
-  stream << "\t--end_time,  -e <end_time>:    Set the end (default "
+  stream << "\t--end_time,    -e <end_time>:    Set the end (default "
          << DEFAULT_END_TIME << "s)" << std::endl;
+  stream << "\t--output,      -o <filename>:    Redirect output in a file"
+         << std::endl;
+  stream << "\t--progression, -p:               Activate printing of "
+            "progression line"
+         << std::endl;
+  stream << "\t--verbose,     -v:               Activate verbose mode "
+         << std::endl;
   stream << std::endl;
 
   stream << "Example:" << std::endl;
-  stream << exec_name << " -- fcc1a fcc1b" << std::endl;
+  stream << exec_name
+         << " --federation rrosace --fom rrosace.fed --federate fcc1 --output "
+            "trace.dat --progression -- fcc1a fcc1b"
+         << std::endl;
 }
 
 auto Configuration::initialized() const -> bool {
