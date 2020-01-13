@@ -31,7 +31,7 @@ static const std::map<Name, std::pair<std::type_index, unsigned int>>
         {"cables", {typeid(RROSACE::Cables), 1}},
     };
 
-template <> auto ModelFactory::Generate<RROSACE::Engine, 1>() -> UpModel {
+template <> auto ModelFactory::generate<RROSACE::Engine, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.delta_th_c_status.set_consumed_flag();
   values.t_status.set_produced_flag();
@@ -39,7 +39,7 @@ template <> auto ModelFactory::Generate<RROSACE::Engine, 1>() -> UpModel {
                                            values.t);
 }
 
-template <> auto ModelFactory::Generate<RROSACE::Elevator, 1>() -> UpModel {
+template <> auto ModelFactory::generate<RROSACE::Elevator, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.delta_e_c_status.set_consumed_flag();
   values.delta_e_status.set_produced_flag();
@@ -48,7 +48,7 @@ template <> auto ModelFactory::Generate<RROSACE::Elevator, 1>() -> UpModel {
 }
 
 template <>
-auto ModelFactory::Generate<RROSACE::FlightDynamics, 1>() -> UpModel {
+auto ModelFactory::generate<RROSACE::FlightDynamics, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.delta_e_status.set_consumed_flag();
   values.t_status.set_consumed_flag();
@@ -63,7 +63,7 @@ auto ModelFactory::Generate<RROSACE::FlightDynamics, 1>() -> UpModel {
 }
 
 template <>
-auto ModelFactory::Generate<RROSACE::AltitudeFilter, 1>() -> UpModel {
+auto ModelFactory::generate<RROSACE::AltitudeFilter, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.h_status.set_consumed_flag();
   values.h_f_status.set_produced_flag();
@@ -71,7 +71,7 @@ auto ModelFactory::Generate<RROSACE::AltitudeFilter, 1>() -> UpModel {
 }
 
 template <>
-auto ModelFactory::Generate<RROSACE::VerticalAirspeedFilter, 1>() -> UpModel {
+auto ModelFactory::generate<RROSACE::VerticalAirspeedFilter, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.vz_status.set_consumed_flag();
   values.vz_f_status.set_produced_flag();
@@ -80,7 +80,7 @@ auto ModelFactory::Generate<RROSACE::VerticalAirspeedFilter, 1>() -> UpModel {
 }
 
 template <>
-auto ModelFactory::Generate<RROSACE::TrueAirspeedFilter, 1>() -> UpModel {
+auto ModelFactory::generate<RROSACE::TrueAirspeedFilter, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.va_status.set_consumed_flag();
   values.va_f_status.set_produced_flag();
@@ -88,7 +88,7 @@ auto ModelFactory::Generate<RROSACE::TrueAirspeedFilter, 1>() -> UpModel {
 }
 
 template <>
-auto ModelFactory::Generate<RROSACE::PitchRateFilter, 1>() -> UpModel {
+auto ModelFactory::generate<RROSACE::PitchRateFilter, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.q_status.set_consumed_flag();
   values.q_f_status.set_produced_flag();
@@ -96,7 +96,7 @@ auto ModelFactory::Generate<RROSACE::PitchRateFilter, 1>() -> UpModel {
 }
 
 template <>
-auto ModelFactory::Generate<RROSACE::VerticalAccelerationFilter, 1>()
+auto ModelFactory::generate<RROSACE::VerticalAccelerationFilter, 1>()
     -> UpModel {
   auto &&values = Values::get_instance();
   values.az_status.set_consumed_flag();
@@ -105,14 +105,14 @@ auto ModelFactory::Generate<RROSACE::VerticalAccelerationFilter, 1>()
                                                                values.az_f);
 }
 
-template <> auto ModelFactory::Generate<RROSACE::FlightMode, 1>() -> UpModel {
+template <> auto ModelFactory::generate<RROSACE::FlightMode, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.mode_status.set_produced_flag();
   return std::make_unique<RROSACE::FlightMode>(values.mode, values.mode);
 }
 
 template <>
-auto ModelFactory::Generate<RROSACE::FlightControlUnit, 1>() -> UpModel {
+auto ModelFactory::generate<RROSACE::FlightControlUnit, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.h_c_status.set_produced_flag();
   values.vz_c_status.set_produced_flag();
@@ -123,7 +123,7 @@ auto ModelFactory::Generate<RROSACE::FlightControlUnit, 1>() -> UpModel {
 }
 
 template <>
-auto ModelFactory::Generate<RROSACE::FlightControlComputerCommand, 1>()
+auto ModelFactory::generate<RROSACE::FlightControlComputerCommand, 1>()
     -> UpModel {
   auto &&values = Values::get_instance();
   values.mode_status.set_consumed_flag();
@@ -144,7 +144,7 @@ auto ModelFactory::Generate<RROSACE::FlightControlComputerCommand, 1>()
 }
 
 template <>
-auto ModelFactory::Generate<RROSACE::FlightControlComputerMonitor, 1>()
+auto ModelFactory::generate<RROSACE::FlightControlComputerMonitor, 1>()
     -> UpModel {
   auto &&values = Values::get_instance();
   values.mode_status.set_consumed_flag();
@@ -171,7 +171,7 @@ auto ModelFactory::Generate<RROSACE::FlightControlComputerMonitor, 1>()
 }
 
 template <>
-auto ModelFactory::Generate<RROSACE::FlightControlComputerCommand, 2>()
+auto ModelFactory::generate<RROSACE::FlightControlComputerCommand, 2>()
     -> UpModel {
   auto &&values = Values::get_instance();
   values.mode_status.set_consumed_flag();
@@ -192,7 +192,7 @@ auto ModelFactory::Generate<RROSACE::FlightControlComputerCommand, 2>()
 }
 
 template <>
-auto ModelFactory::Generate<RROSACE::FlightControlComputerMonitor, 2>()
+auto ModelFactory::generate<RROSACE::FlightControlComputerMonitor, 2>()
     -> UpModel {
   auto &&values = Values::get_instance();
   values.mode_status.set_consumed_flag();
@@ -218,7 +218,7 @@ auto ModelFactory::Generate<RROSACE::FlightControlComputerMonitor, 2>()
       values.relay_delta_th_c_2, values.master_in_law_2);
 }
 
-template <> auto ModelFactory::Generate<RROSACE::Cables, 1>() -> UpModel {
+template <> auto ModelFactory::generate<RROSACE::Cables, 1>() -> UpModel {
   auto &&values = Values::get_instance();
   values.delta_e_c_partial_1_status.set_consumed_flag();
   values.delta_th_c_partial_1_status.set_consumed_flag();
@@ -238,52 +238,52 @@ template <> auto ModelFactory::Generate<RROSACE::Cables, 1>() -> UpModel {
       values.delta_th_c);
 }
 
-auto ModelFactory::Generate(const Name &model_name) -> UpModel {
+auto ModelFactory::generate(const Name &model_name) -> UpModel {
   try {
 
     auto model_type = NAME_TO_CLASS.at(model_name);
 
     if (model_type.first == typeid(RROSACE::Engine)) {
-      return ModelFactory::Generate<RROSACE::Engine, 1>();
+      return ModelFactory::generate<RROSACE::Engine, 1>();
     } else if (model_type.first == typeid(RROSACE::Elevator)) {
-      return ModelFactory::Generate<RROSACE::Elevator, 1>();
+      return ModelFactory::generate<RROSACE::Elevator, 1>();
     } else if (model_type.first == typeid(RROSACE::FlightDynamics)) {
-      return ModelFactory::Generate<RROSACE::FlightDynamics, 1>();
+      return ModelFactory::generate<RROSACE::FlightDynamics, 1>();
     } else if (model_type.first == typeid(RROSACE::AltitudeFilter)) {
-      return ModelFactory::Generate<RROSACE::AltitudeFilter, 1>();
+      return ModelFactory::generate<RROSACE::AltitudeFilter, 1>();
     } else if (model_type.first == typeid(RROSACE::VerticalAirspeedFilter)) {
-      return ModelFactory::Generate<RROSACE::VerticalAirspeedFilter, 1>();
+      return ModelFactory::generate<RROSACE::VerticalAirspeedFilter, 1>();
     } else if (model_type.first == typeid(RROSACE::TrueAirspeedFilter)) {
-      return ModelFactory::Generate<RROSACE::TrueAirspeedFilter, 1>();
+      return ModelFactory::generate<RROSACE::TrueAirspeedFilter, 1>();
     } else if (model_type.first == typeid(RROSACE::PitchRateFilter)) {
-      return ModelFactory::Generate<RROSACE::PitchRateFilter, 1>();
+      return ModelFactory::generate<RROSACE::PitchRateFilter, 1>();
     } else if (model_type.first ==
                typeid(RROSACE::VerticalAccelerationFilter)) {
-      return ModelFactory::Generate<RROSACE::VerticalAccelerationFilter, 1>();
+      return ModelFactory::generate<RROSACE::VerticalAccelerationFilter, 1>();
     } else if (model_type.first == typeid(RROSACE::FlightMode)) {
-      return ModelFactory::Generate<RROSACE::FlightMode, 1>();
+      return ModelFactory::generate<RROSACE::FlightMode, 1>();
     } else if (model_type.first == typeid(RROSACE::FlightControlUnit)) {
-      return ModelFactory::Generate<RROSACE::FlightControlUnit, 1>();
+      return ModelFactory::generate<RROSACE::FlightControlUnit, 1>();
     } else if (model_type.first ==
                typeid(RROSACE::FlightControlComputerCommand)) {
       if (model_type.second == 1) {
-        return ModelFactory::Generate<RROSACE::FlightControlComputerCommand,
+        return ModelFactory::generate<RROSACE::FlightControlComputerCommand,
                                       1>();
       } else if (model_type.second == 2) {
-        return ModelFactory::Generate<RROSACE::FlightControlComputerCommand,
+        return ModelFactory::generate<RROSACE::FlightControlComputerCommand,
                                       2>();
       }
     } else if (model_type.first ==
                typeid(RROSACE::FlightControlComputerMonitor)) {
       if (model_type.second == 1) {
-        return ModelFactory::Generate<RROSACE::FlightControlComputerMonitor,
+        return ModelFactory::generate<RROSACE::FlightControlComputerMonitor,
                                       1>();
       } else if (model_type.second == 2) {
-        return ModelFactory::Generate<RROSACE::FlightControlComputerMonitor,
+        return ModelFactory::generate<RROSACE::FlightControlComputerMonitor,
                                       2>();
       }
     } else if (model_type.first == typeid(RROSACE::Cables)) {
-      return ModelFactory::Generate<RROSACE::Cables, 1>();
+      return ModelFactory::generate<RROSACE::Cables, 1>();
     }
   } catch (std::out_of_range &) {
     // TODO own class

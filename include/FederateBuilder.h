@@ -33,14 +33,14 @@ public:
   FederateBuilder(FederateBuilder &&) = default;
   auto operator=(FederateBuilder &&) -> FederateBuilder & = default;
 
-  auto setFederation(const Name &federation) -> FederateBuilder &;
-  auto setFederate(const Name &federate) -> FederateBuilder &;
-  auto setFom(const Name &fom) -> FederateBuilder &;
-  auto setEndTime(const Seaplanes::SeaplanesTime &endTime) -> FederateBuilder &;
-  auto setLogPointer(std::ostream *p_log) -> FederateBuilder &;
-  auto setOutputPointer(std::ostream *p_output) -> FederateBuilder &;
-  auto setPrintProgression() -> FederateBuilder &;
-  auto addModel(UpModel &&up_model) -> FederateBuilder &;
+  auto set_federation(const Name &federation) -> FederateBuilder &;
+  auto set_federate(const Name &federate) -> FederateBuilder &;
+  auto set_fom(const Name &fom) -> FederateBuilder &;
+  auto set_end_time(const Seaplanes::SeaplanesTime &endTime) -> FederateBuilder &;
+  auto set_log_pointer(std::ostream *p_log) -> FederateBuilder &;
+  auto set_output_pointer(std::ostream *p_output) -> FederateBuilder &;
+  auto set_print_progression() -> FederateBuilder &;
+  auto add_model(UpModel &&up_model) -> FederateBuilder &;
 
   auto build() -> UpFederate;
 };

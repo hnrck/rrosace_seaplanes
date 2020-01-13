@@ -16,23 +16,24 @@ auto main(int argc, char *argv[]) -> int {
     const auto &&configuration = Configuration(VecNames(argv, argv + argc));
     std::cout << configuration << std::endl;
 
-    auto &&builder = FederateBuilder()
-                         .setFederation(configuration.get_federation())
-                         .setFom(configuration.get_fom())
-                         .setFederate(configuration.get_federate())
-                         .setEndTime(configuration.get_end_time())
-                         .setOutputPointer(configuration.get_output_pointer());
+    auto &&builder =
+        FederateBuilder()
+            .set_federation(configuration.get_federation())
+            .set_fom(configuration.get_fom())
+            .set_federate(configuration.get_federate())
+            .set_end_time(configuration.get_end_time())
+            .set_output_pointer(configuration.get_output_pointer());
 
     if (configuration.get_progression()) {
-      builder.setPrintProgression();
+      builder.set_print_progression();
     }
 
     if (configuration.get_verbose()) {
-      builder.setLogPointer(configuration.get_log_pointer());
+      builder.set_log_pointer(configuration.get_log_pointer());
     }
 
     for (const auto &model_name : configuration.get_models()) {
-      builder.addModel(ModelFactory::Generate(model_name));
+      builder.add_model(ModelFactory::generate(model_name));
     }
 
     auto up_federate = builder.build();

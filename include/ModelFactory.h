@@ -13,7 +13,7 @@
 
 class ModelFactory {
 private:
-  template <class T, unsigned int instance> static auto Generate() -> UpModel;
+  template <class T, unsigned int instance> static auto generate() -> UpModel;
 
 public:
   ModelFactory() = delete;
@@ -25,7 +25,7 @@ public:
   ModelFactory(ModelFactory &&) = default;
   auto operator=(ModelFactory &&) -> ModelFactory & = default;
 
-  static UpModel Generate(const Name &model_name);
+  static UpModel generate(const Name &model_name);
 };
 
 #endif // RROSACE_SEAPLANES_MODELFACTORY_H
