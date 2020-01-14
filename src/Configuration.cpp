@@ -9,6 +9,7 @@
 #include <SeaplanesTime.h>
 
 #include <getopt.h>
+#include <iterator>
 #include <limits>
 #include <sstream>
 #include <vector>

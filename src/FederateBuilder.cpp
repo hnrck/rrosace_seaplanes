@@ -6,6 +6,8 @@
 
 #include <FederateBuilder.h>
 
+#include <limits>
+
 using std::ostream;
 
 auto FederateBuilder::set_federation(const Name &federation)
