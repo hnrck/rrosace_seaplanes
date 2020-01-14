@@ -76,35 +76,26 @@ if (APPLE)
     set(CMAKE_MACOSX_RPATH ON)
     find_library(SEAPLANES_LIB seaplanes ENV DYLD_LIBRARY_PATH)
     find_library(RROSACE_LIB rrosace ENV DYLD_LIBRARY_PATH)
-    find_library(RTI_LIB RTI-NG ENV DYLD_LIBRARY_PATH)
-    find_library(FEDTIME_LIB FedTime ENV DYLD_LIBRARY_PATH)
-    find_library(HLA_LIB HLA ENV DYLD_LIBRARY_PATH)
-    if (NOT RTI_LIB) # FIX(h.deschamps) When NAMES finaly works, change this
-        find_library(RTI_LIB RTI-NGd ENV DYLD_LIBRARY_PATH)
-    endif ()
-    if (NOT FEDTIME_LIB) # FIX(h.deschamps) When NAMES finaly works, change this
-        find_library(FEDTIME_LIB FedTimed ENV DYLD_LIBRARY_PATH)
-    endif ()
-    if (NOT HLA_LIB) # FIX(h.deschamps) When NAMES finaly works, change this
-        find_library(HLA_LIB HLAd ENV DYLD_LIBRARY_PATH)
-    endif ()
+    find_library(RTI_LIB NAMES RTI-NG RTI-NGd ENV DYLD_LIBRARY_PATH)
+    find_library(FEDTIME_LIB NAMES FedTime FedTimed ENV DYLD_LIBRARY_PATH)
+    find_library(HLA_LIB NAMES HLA HLAd ENV DYLD_LIBRARY_PATH)
 else ()
     find_library(SEAPLANES_LIB seaplanes ENV LIBRARY_PATH)
     find_library(RROSACE_LIB rrosace ENV LIBRARY_PATH)
     find_library(RTI_LIB RTI-NG ENV LIBRARY_PATH)
     find_library(FEDTIME_LIB FedTime ENV LIBRARY_PATH)
     find_library(HLA_LIB HLA ENV LIBRARY_PATH)
-    if (NOT RTI_LIB) # FIX(h.deschamps) When NAMES finaly works, change this
+    # NAMES has error with Linux.
+    if (NOT RTI_LIB)
         find_library(RTI_LIB RTI-NGd ENV LIBRARY_PATH)
     endif ()
-    if (NOT FEDTIME_LIB) # FIX(h.deschamps) When NAMES finaly works, change this
+    if (NOT FEDTIME_LIB)
         find_library(FEDTIME_LIB FedTimed ENV LIBRARY_PATH)
     endif ()
-    if (NOT HLA_LIB) # FIX(h.deschamps) When NAMES finaly works, change this
+    if (NOT HLA_LIB)
         find_library(HLA_LIB HLAd ENV LIBRARY_PATH)
     endif ()
 endif ()
-
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DFEDERATION_NAME='\"${RROSACE_FEDERATION}\"'")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DFEDERATION_FILE='\"${RROSACE_FOM}\"'")
@@ -128,7 +119,7 @@ set(RROSACE_SEAPLANES_SRCS
 
 add_executable(rrosace_federate ${RROSACE_SEAPLANES_SRCS})
 
-target_link_libraries(rrosace_federate ${RTI_LIB} ${FEDTIME_LIB} ${HLA_LIB} ${RROSACE_LIB} ${SEAPLANES_LIB})
+target_link_libraries(rrosace_federate PUBLIC ${RTI_LIB} ${FEDTIME_LIB} ${HLA_LIB} ${RROSACE_LIB} ${SEAPLANES_LIB})
 
 
 #-----------------------------------------------------------------------------------------------------------------------
