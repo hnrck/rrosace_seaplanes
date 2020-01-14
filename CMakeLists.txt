@@ -77,15 +77,31 @@ if (APPLE)
     find_library(SEAPLANES_LIB seaplanes ENV DYLD_LIBRARY_PATH)
     find_library(RROSACE_LIB rrosace ENV DYLD_LIBRARY_PATH)
     find_library(RTI_LIB RTI-NG ENV DYLD_LIBRARY_PATH)
+    find_library(FEDTIME_LIB FedTime ENV DYLD_LIBRARY_PATH)
+    find_library(HLA_LIB HLA ENV DYLD_LIBRARY_PATH)
     if (NOT RTI_LIB) # FIX(h.deschamps) When NAMES finaly works, change this
         find_library(RTI_LIB RTI-NGd ENV DYLD_LIBRARY_PATH)
+    endif ()
+    if (NOT FEDTIME_LIB) # FIX(h.deschamps) When NAMES finaly works, change this
+        find_library(FEDTIME_LIB FedTimed ENV DYLD_LIBRARY_PATH)
+    endif ()
+    if (NOT HLA_LIB) # FIX(h.deschamps) When NAMES finaly works, change this
+        find_library(HLA_LIB HLAd ENV DYLD_LIBRARY_PATH)
     endif ()
 else ()
     find_library(SEAPLANES_LIB seaplanes ENV LIBRARY_PATH)
     find_library(RROSACE_LIB rrosace ENV LIBRARY_PATH)
     find_library(RTI_LIB RTI-NG ENV LIBRARY_PATH)
+    find_library(FEDTIME_LIB FedTime ENV LIBRARY_PATH)
+    find_library(HLA_LIB HLA ENV LIBRARY_PATH)
     if (NOT RTI_LIB) # FIX(h.deschamps) When NAMES finaly works, change this
         find_library(RTI_LIB RTI-NGd ENV LIBRARY_PATH)
+    endif ()
+    if (NOT FEDTIME_LIB) # FIX(h.deschamps) When NAMES finaly works, change this
+        find_library(FEDTIME_LIB FedTimed ENV LIBRARY_PATH)
+    endif ()
+    if (NOT HLA_LIB) # FIX(h.deschamps) When NAMES finaly works, change this
+        find_library(HLA_LIB HLAd ENV LIBRARY_PATH)
     endif ()
 endif ()
 
@@ -112,10 +128,7 @@ set(RROSACE_SEAPLANES_SRCS
 
 add_executable(rrosace_federate ${RROSACE_SEAPLANES_SRCS})
 
-target_link_libraries(rrosace_federate ${RTI_LIB} ${RROSACE_LIB} ${SEAPLANES_LIB})
-if (APPLE)
-    target_link_libraries(rrosace_federate ${FEDTIME_LIB} ${HLA_LIB})
-endif ()
+target_link_libraries(rrosace_federate ${RTI_LIB} ${FEDTIME_LIB} ${HLA_LIB} ${RROSACE_LIB} ${SEAPLANES_LIB})
 
 
 #-----------------------------------------------------------------------------------------------------------------------
